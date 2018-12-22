@@ -1,0 +1,24 @@
+#配置模板
+#https://docs.spring.io/spring-boot/docs/1.4.0.RELEASE/reference/html/common-application-properties.html
+spring:
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 3MB
+      max-request-size: 3MB
+  #模板配置
+  thymeleaf:
+    #开发时一定关闭，否则调试困难
+    cache: false
+    prefix: classpath:/static/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+  data:
+    neo4j:
+      uri: bolt://localhost:7687
+      username: test
+      password: test
+server:
+  context-path: /feisbook
