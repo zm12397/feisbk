@@ -29,7 +29,7 @@ public class App extends SpringBootServletInitializer {
 
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
-		UserDao userDao = context.getBean(UserDao.class);
+//		UserDao userDao = context.getBean(UserDao.class);
 
 //		System.out.println(user);
 //		插入节点：
@@ -57,8 +57,8 @@ public class App extends SpringBootServletInitializer {
 //		BeFollowDao beFollowDao = context.getBean(BeFollowDao.class);
 //		beFollowDao.save(befollow);
 
-		UserDO wlf = userDao.findOne(96l);
-		System.out.println(wlf);
+//		UserDO wlf = userDao.findOne(96l);
+//		System.out.println(wlf);
 	}
 
 }
