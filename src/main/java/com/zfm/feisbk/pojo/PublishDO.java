@@ -11,14 +11,12 @@ public class PublishDO {
 	private UserDO author;
 	@EndNode
 	private BlogDO blogDO;
-	private long publishTime;
 	private long createTime;
 	private long modifyTime;
 
 	public PublishDO(UserDO author, BlogDO blogDO) {
 		this.author = author;
 		this.blogDO = blogDO;
-		publishTime = System.currentTimeMillis();
 		createTime = System.currentTimeMillis();
 		modifyTime = System.currentTimeMillis();
 	}
@@ -33,10 +31,6 @@ public class PublishDO {
 
 	public void setBlogDO(BlogDO blogDO) {
 		this.blogDO = blogDO;
-	}
-
-	public void setPublishTime(long publishTime) {
-		this.publishTime = publishTime;
 	}
 
 	public void setCreateTime(long createTime) {
@@ -59,15 +53,25 @@ public class PublishDO {
 		return blogDO;
 	}
 
-	public long getPublishTime() {
-		return publishTime;
-	}
-
 	public long getCreateTime() {
 		return createTime;
 	}
 
 	public long getModifyTime() {
 		return modifyTime;
+	}
+
+	public PublishDO() {
+	}
+
+	@Override
+	public String toString() {
+		return "PublishDO{" +
+				"id=" + id +
+				", author=" + author.getId() +
+				", blogDO=" + blogDO.getId() +
+				", createTime=" + createTime +
+				", modifyTime=" + modifyTime +
+				'}';
 	}
 }

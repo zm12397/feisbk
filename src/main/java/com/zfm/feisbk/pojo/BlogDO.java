@@ -53,4 +53,6 @@ public class BlogDO {
 	public long getModifyTime() {
 		return modifyTime;
 	}
+
+	public BlogDO(){}
 }

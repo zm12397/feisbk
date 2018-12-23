@@ -18,32 +18,14 @@ public class UserDO {
 	private Long createTime;
 	private Long modifyTime;
 
-	@Relationship(type = "FOLLOW", direction = Relationship.INCOMING)
-	Set<UserDO> followers = new HashSet<UserDO>();
+	@Relationship(type = "TOFOLLOW")
+	private Set<TofollowDO> followeds;
 
-	@Relationship(type = "FOLLOW", direction = Relationship.OUTGOING)
-	Set<UserDO> followed = new HashSet<UserDO>();
+	@Relationship(type = "BEFOLLOW")
+	private Set<BefollowDO> followers;
 
-	@Relationship(type = "FOLLOW")
-	Set<PublishDO> blogs = new HashSet<PublishDO>();
-
-	public FollowDO follow(UserDO user) {
-		FollowDO followDO = new FollowDO(this, user);
-		this.followed.add(user);
-		user.followers.add(this);
-		return followDO;
-	}
-
-	public PublishDO publish(BlogDO blogDO) {
-		PublishDO publishDO = new PublishDO(this, blogDO);
-		this.blogs.add(publishDO);
-		return publishDO;
-	}
-
-	public void unfollow(UserDO user) {
-		this.followed.remove(user);
-		user.followers.remove(this);
-	}
+	@Relationship(type = "PUBLISH")
+	private Set<PublishDO> publishes;
 
 	public Long getId() {
 		return id;
@@ -85,27 +67,43 @@ public class UserDO {
 		this.modifyTime = modifyTime;
 	}
 
-	public Set<UserDO> getFollowers() {
+	public Set<TofollowDO> getFolloweds() {
+		return followeds;
+	}
+
+	public Set<BefollowDO> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(Set<UserDO> followers) {
+	public void setFolloweds(Set<TofollowDO> followeds) {
+		this.followeds = followeds;
+	}
+
+	public void setFollowers(Set<BefollowDO> followers) {
 		this.followers = followers;
 	}
 
-	public Set<UserDO> getFollowed() {
-		return followed;
+	public Set<PublishDO> getPublishes() {
+		return publishes;
 	}
 
-	public void setFollowed(Set<UserDO> followed) {
-		this.followed = followed;
+	public void setPublishes(Set<PublishDO> publishes) {
+		this.publishes = publishes;
 	}
 
-	public Set<PublishDO> getBlogs() {
-		return blogs;
-	}
+	public UserDO(){}
 
-	public void setBlogs(Set<PublishDO> blogs) {
-		this.blogs = blogs;
+	@Override
+	public String toString() {
+		return "UserDO{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", createTime=" + createTime +
+				", modifyTime=" + modifyTime +
+				", followeds=" + followeds +
+				", followers=" + followers +
+				", publishes=" + publishes +
+				'}';
 	}
 }

@@ -5,6 +5,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
 
-public interface UserDao extends Neo4jRepository {
+public interface UserDao extends Neo4jRepository<UserDO,Long> {
 	UserDO findByUsername(@Param("username") String username);
 }
