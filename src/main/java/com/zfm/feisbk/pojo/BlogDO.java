@@ -9,8 +9,11 @@ public class BlogDO {
 	@GraphId
 	private Long id;
 
+	//动态的文本内容
 	private String contentTest = "";
+	//动态的图片（url地址）
 	private String contentImage = "";
+	//创建（发布时间戳19位）
 	private long createTime;
 	private long modifyTime;
 

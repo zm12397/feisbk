@@ -46,7 +46,21 @@ public class BefollowDO {
         return endNode;
     }
 
+    public long getCreateTime() {
+        return createTime;
+    }
 
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public long getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(long modifyTime) {
+        this.modifyTime = modifyTime;
+    }
 
     @Override
     public String toString() {
