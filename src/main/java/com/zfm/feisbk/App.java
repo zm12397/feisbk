@@ -57,8 +57,21 @@ public class App extends SpringBootServletInitializer {
 //		BeFollowDao beFollowDao = context.getBean(BeFollowDao.class);
 //		beFollowDao.save(befollow);
 
-		UserDO wlf = userDao.findOne(96l);
-		System.out.println(wlf);
+//		UserDO wlf = userDao.findOne(96l);
+//		System.out.println(wlf);
+
+//		UserDO user = new UserDO();
+//		user.setUsername("volleyfo");
+//		user.setPassword("123");
+//		userDao.save(user);
+//		UserDO user2 = new UserDO();
+//		user2.setUsername("zfm");
+//		user2.setPassword("123");
+//		userDao.save(user2);
+//		UserDO user3 = new UserDO();
+//		user3.setUsername("czh");
+//		user3.setPassword("123");
+//		userDao.save(user3);
 	}
 
 }
