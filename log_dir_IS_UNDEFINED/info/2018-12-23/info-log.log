@@ -1008,3 +1008,84 @@
 2018-12-23 15:38:56.749 INFO  org.neo4j.ogm.drivers.bolt.request.BoltRequest - Request: MATCH (n:`UserDO`) WHERE ID(n) = { id } WITH n MATCH p=(n)-[*0..1]-(m) RETURN p with params {id=96}
 2018-12-23 15:38:56.754 INFO  com.zfm.feisbk.service.RecommendService - endnode:UserDO{id=96, username='wlf', password='123', name='null', tel='null', email='null', address='null', sex=null, birthday=null, description='null', createTime=null, modifyTime=null, state=null, followeds=[TofollowDO{id=47, startNode=96, endNode=116, createTime=0, modifyTime=0}, TofollowDO{id=45, startNode=96, endNode=97, createTime=0, modifyTime=0}], followers=null, publishes=null}
 2018-12-23 15:38:56.754 INFO  com.zfm.feisbk.service.RecommendService - [UserDO{id=97, username='czh', password='123', name='null', tel='null', email='null', address='null', sex=null, birthday=null, description='null', createTime=null, modifyTime=null, state=null, followeds=null, followers=[BefollowDO{id=44, startNode=97, endNode=96, createTime=0, modifyTime=0}], publishes=null}, UserDO{id=116, username='test', password='345', name='null', tel='null', email='null', address='null', sex=null, birthday=null, description='null', createTime=null, modifyTime=null, state=null, followeds=null, followers=null, publishes=null}]
+2018-12-23 16:13:06.768 INFO  com.zfm.feisbk.App - Starting App on MACHENI-HPG85UQ with PID 14512 (D:\Workspace\ideal-workspace\feisbk\target\classes started by admin in D:\Workspace\ideal-workspace\feisbk)
+2018-12-23 16:13:06.775 INFO  com.zfm.feisbk.App - No active profile set, falling back to default profiles: default
+2018-12-23 16:13:07.007 INFO  org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51399530: startup date [Sun Dec 23 16:13:07 CST 2018]; root of context hierarchy
+2018-12-23 16:13:07.028 INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.3.6.Final
+2018-12-23 16:13:08.276 INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2018-12-23 16:13:08.285 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2018-12-23 16:13:08.285 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.23
+2018-12-23 16:13:08.368 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/feisbook] - Initializing Spring embedded WebApplicationContext
+2018-12-23 16:13:08.368 INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1361 ms
+2018-12-23 16:13:08.477 INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Mapping servlet: 'dispatcherServlet' to [/]
+2018-12-23 16:13:08.486 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-23 16:13:08.486 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-23 16:13:08.486 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-12-23 16:13:08.486 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-23 16:13:08.570 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Starting Post-processing phase
+2018-12-23 16:13:08.570 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Building annotation class map
+2018-12-23 16:13:08.570 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Building interface class map for 28 classes
+2018-12-23 16:13:08.606 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Post-processing complete
+2018-12-23 16:13:08.610 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - 28 classes loaded in 57065713 nanoseconds
+2018-12-23 16:13:08.620 INFO  org.neo4j.ogm.service.DriverService - Using: [org.neo4j.ogm.drivers.bolt.driver.BoltDriver]
+2018-12-23 16:13:08.756 INFO  org.springframework.data.neo4j.mapping.Neo4jMappingContext - No class information found in OGM meta-data for class java.awt.image.BufferedImage so treating as simple type for SD Commons
+2018-12-23 16:13:08.776 INFO  org.springframework.data.neo4j.mapping.Neo4jMappingContext - Neo4jMappingContext initialisation completed
+2018-12-23 16:13:09.126 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51399530: startup date [Sun Dec 23 16:13:07 CST 2018]; root of context hierarchy
+2018-12-23 16:13:09.185 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/{page}],methods=[GET]}" onto public java.lang.String com.zfm.feisbk.controller.MainController.main(java.lang.String)
+2018-12-23 16:13:09.185 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/recommend/my.action],methods=[GET]}" onto public com.zfm.feisbk.pojo.NormalResultDTO com.zfm.feisbk.controller.RecommendController.add(javax.servlet.http.HttpSession)
+2018-12-23 16:13:09.185 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/test/add.action],methods=[POST]}" onto public com.zfm.feisbk.pojo.NormalResultDTO com.zfm.feisbk.controller.TestController.add()
+2018-12-23 16:13:09.185 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-12-23 16:13:09.185 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-12-23 16:13:09.199 INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-23 16:13:09.199 INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-23 16:13:09.231 INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-23 16:13:09.598 INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2018-12-23 16:13:09.608 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-23 16:13:09.618 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2018-12-23 16:13:09.626 INFO  org.apache.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+2018-12-23 16:13:09.639 INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2018-12-23 16:13:09.647 INFO  com.zfm.feisbk.App - Started App in 3.171 seconds (JVM running for 3.784)
+2018-12-23 16:13:15.728 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/feisbook] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-12-23 16:13:15.728 INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2018-12-23 16:13:15.746 INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 18 ms
+2018-12-23 16:13:16.003 INFO  org.neo4j.ogm.drivers.bolt.request.BoltRequest - Request: MATCH (n:`UserDO`) WHERE ID(n) = { id } WITH n MATCH p=(n)-[*0..1]-(m) RETURN p with params {id=76}
+2018-12-23 16:13:16.031 INFO  org.neo4j.ogm.drivers.bolt.request.BoltRequest - Request: MATCH (n:`UserDO`) WHERE ID(n) = { id } WITH n MATCH p=(n)-[*0..1]-(m) RETURN p with params {id=96}
+2018-12-23 16:13:16.037 INFO  com.zfm.feisbk.service.RecommendService - endnode:UserDO{id=96, username='wlf', password='123', name='null', tel='null', email='null', address='null', sex=null, birthday=null, description='null', createTime=null, modifyTime=null, state=null, followeds=[TofollowDO{id=45, startNode=96, endNode=97, createTime=0, modifyTime=0}, TofollowDO{id=47, startNode=96, endNode=116, createTime=0, modifyTime=0}], followers=null, publishes=null}
+2018-12-23 16:13:16.038 INFO  com.zfm.feisbk.service.RecommendService - [UserDO{id=97, username='czh', password='123', name='null', tel='null', email='null', address='null', sex=null, birthday=null, description='null', createTime=null, modifyTime=null, state=null, followeds=null, followers=[BefollowDO{id=44, startNode=97, endNode=96, createTime=0, modifyTime=0}], publishes=null}, UserDO{id=116, username='test', password='345', name='null', tel='null', email='null', address='null', sex=null, birthday=null, description='null', createTime=null, modifyTime=null, state=null, followeds=null, followers=null, publishes=null}]
+2018-12-23 16:15:50.346 INFO  com.zfm.feisbk.App - Starting App on MACHENI-HPG85UQ with PID 11448 (D:\Workspace\ideal-workspace\feisbk\target\classes started by admin in D:\Workspace\ideal-workspace\feisbk)
+2018-12-23 16:15:50.346 INFO  com.zfm.feisbk.App - No active profile set, falling back to default profiles: default
+2018-12-23 16:15:50.566 INFO  org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51399530: startup date [Sun Dec 23 16:15:50 CST 2018]; root of context hierarchy
+2018-12-23 16:15:50.569 INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.3.6.Final
+2018-12-23 16:15:51.885 INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2018-12-23 16:15:51.895 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2018-12-23 16:15:51.898 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.23
+2018-12-23 16:15:51.997 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/feisbook] - Initializing Spring embedded WebApplicationContext
+2018-12-23 16:15:51.997 INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1431 ms
+2018-12-23 16:15:52.178 INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Mapping servlet: 'dispatcherServlet' to [/]
+2018-12-23 16:15:52.178 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-23 16:15:52.178 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-23 16:15:52.178 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-12-23 16:15:52.178 INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-23 16:15:52.291 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Starting Post-processing phase
+2018-12-23 16:15:52.291 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Building annotation class map
+2018-12-23 16:15:52.291 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Building interface class map for 28 classes
+2018-12-23 16:15:52.332 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - Post-processing complete
+2018-12-23 16:15:52.332 INFO  org.neo4j.ogm.metadata.ClassFileProcessor - 28 classes loaded in 60271277 nanoseconds
+2018-12-23 16:15:52.345 INFO  org.neo4j.ogm.service.DriverService - Using: [org.neo4j.ogm.drivers.bolt.driver.BoltDriver]
+2018-12-23 16:15:52.509 INFO  org.springframework.data.neo4j.mapping.Neo4jMappingContext - No class information found in OGM meta-data for class java.awt.image.BufferedImage so treating as simple type for SD Commons
+2018-12-23 16:15:52.527 INFO  org.springframework.data.neo4j.mapping.Neo4jMappingContext - Neo4jMappingContext initialisation completed
+2018-12-23 16:15:52.833 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@51399530: startup date [Sun Dec 23 16:15:50 CST 2018]; root of context hierarchy
+2018-12-23 16:15:52.958 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/{page}],methods=[GET]}" onto public java.lang.String com.zfm.feisbk.controller.MainController.main(java.lang.String)
+2018-12-23 16:15:52.958 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/recommend/my.action],methods=[GET]}" onto public com.zfm.feisbk.pojo.NormalResultDTO com.zfm.feisbk.controller.RecommendController.add(javax.servlet.http.HttpSession)
+2018-12-23 16:15:52.958 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/test/add.action],methods=[POST]}" onto public com.zfm.feisbk.pojo.NormalResultDTO com.zfm.feisbk.controller.TestController.add()
+2018-12-23 16:15:52.958 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-12-23 16:15:52.958 INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-12-23 16:15:52.979 INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-23 16:15:52.979 INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-23 16:15:53.009 INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-23 16:15:53.358 INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2018-12-23 16:15:53.377 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2018-12-23 16:15:53.384 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2018-12-23 16:15:53.389 INFO  org.apache.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+2018-12-23 16:15:53.407 INFO  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2018-12-23 16:15:53.407 INFO  com.zfm.feisbk.App - Started App in 3.351 seconds (JVM running for 3.904)

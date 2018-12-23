@@ -1,6 +1,7 @@
 package com.zfm.feisbk.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.*;
 
 @RelationshipEntity(type = "PUBLISH")
@@ -8,8 +9,10 @@ public class PublishDO {
 	@GraphId
 	private Long id;
 	@StartNode
+	@JsonIgnore
 	private UserDO author;
 	@EndNode
+	@JsonIgnore
 	private BlogDO blogDO;
 	private long createTime;
 	private long modifyTime;
