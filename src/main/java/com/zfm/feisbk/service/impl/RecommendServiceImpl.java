@@ -55,7 +55,8 @@ public class RecommendServiceImpl implements RecommendService{
         for(TofollowDO followed : followeds){
             UserDO endNode = null;      //关注关系中被关注的那个人，即关系的end节点
             try {
-                endNode = followed.getEndNode();
+                //注：这里不能自动的级联查询
+                endNode = userDao.findOne(followed.getEndNode().getId());
             }catch (Exception e) {
                 logger.error(e.getMessage());
                 throw new CustomerException("查询关注的人失败");
