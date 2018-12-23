@@ -18,6 +18,8 @@ public class UserDO {
 	private Long createTime;
 	private Long modifyTime;
 
+	private Short state;
+
 	@Relationship(type = "TOFOLLOW")
 	private Set<TofollowDO> followeds;
 
@@ -91,6 +93,14 @@ public class UserDO {
 		this.publishes = publishes;
 	}
 
+	public Short getState() {
+		return state;
+	}
+
+	public void setState(Short state) {
+		this.state = state;
+	}
+
 	public UserDO(){}
 
 	@Override
@@ -101,6 +111,7 @@ public class UserDO {
 				", password='" + password + '\'' +
 				", createTime=" + createTime +
 				", modifyTime=" + modifyTime +
+				", state=" + state +
 				", followeds=" + followeds +
 				", followers=" + followers +
 				", publishes=" + publishes +
