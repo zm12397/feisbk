@@ -58,7 +58,7 @@ public class FollowController {
 
     @RequestMapping(path = "/get.action", method = RequestMethod.GET)
     public NormalResultDTO unfollow(String username) {
-        request.getSession().setAttribute("User",Long.valueOf(34));
+//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         Long userId = (Long) request.getSession().getAttribute("User");
         try{
@@ -78,7 +78,7 @@ public class FollowController {
 
     @RequestMapping(path = "/getbe.action", method = RequestMethod.GET)
     public NormalResultDTO getFollowers() {
-        request.getSession().setAttribute("User",Long.valueOf(34));
+//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         Long userId = (Long) request.getSession().getAttribute("User");
         try{
@@ -93,7 +93,7 @@ public class FollowController {
     }
     @RequestMapping(path = "/getto.action", method = RequestMethod.GET)
     public NormalResultDTO getFolloweds() {
-        request.getSession().setAttribute("User",Long.valueOf(34));
+//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         Long userId = (Long) request.getSession().getAttribute("User");
         try{
