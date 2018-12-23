@@ -3,3 +3,4 @@ target/
 *.xml
 .gitignore
 App.java
+log_dir_IS_UNDEFINED/

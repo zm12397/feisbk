@@ -175,10 +175,6 @@ public class FollowServiceImpl implements FollowService {
                 throw new CustomerException("查询粉丝失败");
             }
             logger.info("endnode:" + endNode.toString());
-            if (endNode.getFollowers()!=null)
-                endNode.getFollowers().clear();
-            if (endNode.getFolloweds()!=null)
-                endNode.getFolloweds().clear();
             logger.info("endNode:" + endNode.toString());
             followers.add(endNode);
         }
@@ -222,10 +218,6 @@ public class FollowServiceImpl implements FollowService {
             if(endNode == null){
                 throw new CustomerException("查询关注的人失败");
             }
-            if (endNode.getFollowers()!=null)
-                endNode.getFollowers().clear();
-            if (endNode.getFolloweds()!=null)
-                endNode.getFolloweds().clear();
             logger.info("endnode:" + endNode.toString());
             followeds.add(endNode);
             logger.info("followeds:" + followeds.toString());

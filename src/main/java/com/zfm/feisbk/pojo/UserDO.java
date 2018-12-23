@@ -15,8 +15,18 @@ public class UserDO {
 
 	private String username;
 	private String password;
-	private Long createTime;
-	private Long modifyTime;
+	private String name;		//昵称
+	private String tel;
+	private String email;
+	private String address;
+	private Short sex;			//0男 1女
+	private Long birthday;
+	private String description;	//个人描述的一句话，或者个性签名
+
+	private Long createTime;	//创建时间
+	private Long modifyTime;	//修改时间
+
+	private Short state;		//用户状态 1激活 0禁用
 
 	@Relationship(type = "TOFOLLOW")
 	private Set<TofollowDO> followeds;
@@ -91,6 +101,70 @@ public class UserDO {
 		this.publishes = publishes;
 	}
 
+	public Short getState() {
+		return state;
+	}
+
+	public void setState(Short state) {
+		this.state = state;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Short getSex() {
+		return sex;
+	}
+
+	public void setSex(Short sex) {
+		this.sex = sex;
+	}
+
+	public Long getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Long birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public UserDO(){}
 
 	@Override
@@ -99,8 +173,16 @@ public class UserDO {
 				"id=" + id +
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", tel='" + tel + '\'' +
+				", email='" + email + '\'' +
+				", address='" + address + '\'' +
+				", sex=" + sex +
+				", birthday=" + birthday +
+				", description='" + description + '\'' +
 				", createTime=" + createTime +
 				", modifyTime=" + modifyTime +
+				", state=" + state +
 				", followeds=" + followeds +
 				", followers=" + followers +
 				", publishes=" + publishes +

@@ -27,12 +27,12 @@ public class FollowController {
     private FollowService followService;
 
     @RequestMapping(path = "/follow.action", method = RequestMethod.POST)
-    public NormalResultDTO follow(Long followedId) {
-        request.getSession().setAttribute("User",Long.valueOf(34));
+    public NormalResultDTO follow(Long id) {
+//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         Long userId = (Long) request.getSession().getAttribute("User");
         try{
-            followService.addFollow(userId,followedId);
+            followService.addFollow(userId,id);
             result.setCode("0000");
             result.setMessage("successful");
         }catch (CustomerException e){
@@ -42,12 +42,12 @@ public class FollowController {
     }
 
     @RequestMapping(path = "/unfollow.action", method = RequestMethod.POST)
-    public NormalResultDTO unfollow(Long followedId) {
-        request.getSession().setAttribute("User",Long.valueOf(34));
+    public NormalResultDTO unfollow(Long id) {
+//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         Long userId = (Long) request.getSession().getAttribute("User");
         try{
-            followService.deleteFollow(userId,followedId);
+            followService.deleteFollow(userId,id);
             result.setCode("0000");
             result.setMessage("successful");
         }catch (CustomerException e){

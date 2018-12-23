@@ -1,5 +1,6 @@
 package com.zfm.feisbk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.EndNode;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.RelationshipEntity;
@@ -11,8 +12,10 @@ public class TofollowDO{
     private Long id;
 
     @StartNode
+    @JsonIgnore
     private UserDO startNode;
     @EndNode
+    @JsonIgnore
     private UserDO endNode;
 
     private long createTime;
