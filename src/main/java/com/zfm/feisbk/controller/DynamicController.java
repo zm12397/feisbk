@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -46,7 +48,8 @@ public class DynamicController {
 
         try{
             user = dynamicService.findById(id);
-            Set<BlogDO> blogList = dynamicService.getBlogList(user);
+            List<Map<String, Object>> blogList = dynamicService.getBlogList(user);
+
             result.setCode("0000");
             result.setMessage("successful");
             result.setData(blogList);

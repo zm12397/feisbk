@@ -12,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 /**
  * @Author: zhouchi
@@ -76,10 +76,10 @@ public class DynamicServiceImpl implements DynamicService{
 
 
     @Override
-    public Set<BlogDO> getBlogList(UserDO user) {
+    public List<Map<String, Object>> getBlogList(UserDO user) {
 
         Set<TofollowDO> followeds;//当前用户的关注关系集合
-        Set<BlogDO> blogLists = new HashSet<>();
+        List<Map<String, Object>> blogLists = new ArrayList<>();
         //获取当前用户的关注关系集合
         try{
             followeds = user.getFolloweds();
@@ -91,9 +91,19 @@ public class DynamicServiceImpl implements DynamicService{
         //获取当前用户自己的动态
         Set<PublishDO> ownPublishes = user.getPublishes();
         BlogDO ownBlog = null;
+
         for (PublishDO publish: ownPublishes){
+            Map<String, Object> blog = new HashMap<>();
             ownBlog = publish.getBlogDO();
-            blogLists.add(ownBlog);
+            blog.put("name", user.getName());
+            blog.put("userid", user.getId());
+            blog.put("username", user.getUsername());
+            blog.put("id", ownBlog.getId());
+            blog.put("contentTest", ownBlog.getContentTest());
+            blog.put("contentImage", ownBlog.getContentImage());
+            blog.put("createTime", ownBlog.getCreateTime());
+            blog.put("modifyTime", ownBlog.getModifyTime());
+            blogLists.add(blog);
         }
 
         //如果当前用户没有关注别人，那就推荐不了
@@ -123,9 +133,22 @@ public class DynamicServiceImpl implements DynamicService{
             }
             //当前关注的用户的动态
             Set<PublishDO> publishes = endNode.getPublishes();
-            BlogDO blog = null;
+            UserDO blogPublisher = null;
+            BlogDO blogs = null;
+
             for (PublishDO publish: publishes){
-                blog = publish.getBlogDO();
+                Map<String, Object> blog = new HashMap<>();
+                blogs = publish.getBlogDO();
+                blogPublisher = publish.getAuthor();
+                blog.put("name", blogPublisher.getName());
+                blog.put("userid", blogPublisher.getId());
+                blog.put("username",blogPublisher.getUsername());
+                blog.put("id", blogs.getId());
+                blog.put("contentTest", blogs.getContentTest());
+                blog.put("contentImage", blogs.getContentImage());
+                blog.put("createTime", blogs.getCreateTime());
+                blog.put("modifyTime", blogs.getModifyTime());
+
                 blogLists.add(blog);
             }
         }

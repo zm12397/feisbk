@@ -4,6 +4,8 @@ import com.zfm.feisbk.pojo.BlogDO;
 import com.zfm.feisbk.pojo.NormalResultDTO;
 import com.zfm.feisbk.pojo.UserDO;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -14,6 +16,6 @@ import java.util.Set;
 public interface DynamicService {
     NormalResultDTO postBlog(UserDO user, BlogDO blog);
     UserDO findById(Long id);
-    Set<BlogDO> getBlogList(UserDO user);
+    List<Map<String, Object>> getBlogList(UserDO user);
     Set<BlogDO> getSpecificBlogList(UserDO user);
 }
