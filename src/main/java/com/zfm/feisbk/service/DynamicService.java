@@ -17,5 +17,5 @@ public interface DynamicService {
     NormalResultDTO postBlog(UserDO user, BlogDO blog);
     UserDO findById(Long id);
     List<Map<String, Object>> getBlogList(UserDO user);
-    Set<BlogDO> getSpecificBlogList(UserDO user);
+    List<BlogDO> getSpecificBlogList(UserDO user);
 }

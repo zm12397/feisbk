@@ -20,9 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: zhouchi
@@ -50,6 +48,20 @@ public class DynamicController {
             user = dynamicService.findById(id);
             List<Map<String, Object>> blogList = dynamicService.getBlogList(user);
 
+            //对bloglist对创建时间进行逆序排序
+            Collections.sort(blogList, new Comparator<Map>() {
+                @Override
+                public int compare(Map o1, Map o2) {
+                    long c1 = Long.valueOf(o1.get("createTime").toString());
+                    long c2 = Long.valueOf(o2.get("createTime").toString());
+                    if(c1 > c2){
+                        return -1;
+                    }else{
+                        return 1;
+                    }
+                }
+            });
+
             result.setCode("0000");
             result.setMessage("successful");
             result.setData(blogList);
@@ -67,7 +79,7 @@ public class DynamicController {
 
         try{
             user = dynamicService.findById(userid);
-            Set<BlogDO> blogList = dynamicService.getSpecificBlogList(user);
+            List<BlogDO> blogList = dynamicService.getSpecificBlogList(user);
             result.setCode("0000");
             result.setMessage("successful");
             result.setData(blogList);

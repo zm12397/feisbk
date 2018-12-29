@@ -136,6 +136,11 @@ public class DynamicServiceImpl implements DynamicService{
             UserDO blogPublisher = null;
             BlogDO blogs = null;
 
+            //如果关注的用户的动态为空，跳至下一个关注的用户
+            if(publishes.isEmpty() || publishes == null){
+                continue;
+            }
+
             for (PublishDO publish: publishes){
                 Map<String, Object> blog = new HashMap<>();
                 blogs = publish.getBlogDO();
@@ -158,18 +163,32 @@ public class DynamicServiceImpl implements DynamicService{
     }
 
     @Override
-    public Set<BlogDO> getSpecificBlogList(UserDO user) {
+    public List<BlogDO> getSpecificBlogList(UserDO user) {
 
         if(user == null){
             throw new CustomerException("找不到当前用户");
         }
-        Set<BlogDO> blogLists = new HashSet<BlogDO>();
+        List<BlogDO> blogLists = new ArrayList<>();
         Set<PublishDO> publishes = user.getPublishes();
         BlogDO blog = null;
         for (PublishDO publish: publishes){
             blog = publish.getBlogDO();
             blogLists.add(blog);
         }
+
+        Collections.sort(blogLists, new Comparator<BlogDO>() {
+            @Override
+            public int compare(BlogDO o1, BlogDO o2) {
+                Long c1 = o1.getCreateTime();
+                Long c2 = o2.getCreateTime();
+                if(c1 > c2){
+                    return -1;
+                }else{
+                    return 1;
+                }
+            }
+        });
+
         return blogLists;
     }
 
