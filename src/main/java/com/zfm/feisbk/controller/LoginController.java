@@ -2,12 +2,15 @@ package com.zfm.feisbk.controller;
 
 import com.zfm.feisbk.CustomerException;
 import com.zfm.feisbk.pojo.NormalResultDTO;
+import com.zfm.feisbk.pojo.UserDO;
 import com.zfm.feisbk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author JTR
@@ -20,6 +23,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HttpSession session;
+
     /**
      * 登录
      * @param username
@@ -31,8 +37,9 @@ public class LoginController {
                                  @RequestParam("password") String password) {
         NormalResultDTO result = new NormalResultDTO("9999","wrong username or password",null);
         try {
-            NormalResultDTO login = userService.login(username, password);
-            if (login.getCode().equals("0000")) {
+            UserDO user = userService.login(username, password);
+            if (user != null) {
+                session.setAttribute("key", user.getId());
                 result.setCode("0000");
                 result.setMessage("successful");
             }

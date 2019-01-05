@@ -31,8 +31,8 @@ public class RegisterController {
     public NormalResultDTO verify(@RequestParam("username") String username) {
         NormalResultDTO result = new NormalResultDTO("9999","not unique username",null);
         try {
-            NormalResultDTO verify = userService.verify(username);
-            if (verify.getCode().equals("0000")) {
+            UserDO verify = userService.verify(username);
+            if (verify == null) {
                 result.setCode("0000");
                 result.setMessage("successful");
             }
@@ -66,8 +66,8 @@ public class RegisterController {
                                     @RequestParam("description") String desciption) {
         NormalResultDTO result = new NormalResultDTO("9999","not unique username",null);
         try {
-            NormalResultDTO verify = userService.verify(username);
-            if (verify.getCode().equals("0000")) {
+            UserDO verify = userService.verify(username);
+            if (verify == null) {
                 result.setCode("0000");
                 result.setMessage("successful");
             }else {
@@ -88,8 +88,8 @@ public class RegisterController {
             user.setModifyTime(current);
             Short s = 1;
             user.setState(s);
-            NormalResultDTO addUser = userService.addUser(user);
-            if (!addUser.getCode().equals("0000")) {
+            UserDO addUser = userService.addUser(user);
+            if (addUser == null) {
                 result.setCode("9999");
                 result.setMessage("register failed");
             }
