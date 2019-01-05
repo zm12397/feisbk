@@ -30,8 +30,7 @@ public class UserServiceImpl implements UserService {
      * @param password
      */
     @Override
-    public NormalResultDTO login(String username, String password) {
-        NormalResultDTO result = new NormalResultDTO("9999", "unknow error", null);
+    public UserDO login(String username, String password) {
         UserDO user = null;
         try {
             user = userDao.findByUsername(username);
@@ -44,12 +43,10 @@ public class UserServiceImpl implements UserService {
         }
         try {
             if (password.equals(user.getPassword()) && username.equals(user.getUsername())) {
-                result.setCode("0000");
-                result.setMessage("successful");
-                return result;
+                return user;
             }
             else
-                return result;
+                return null;
         }catch (Exception e) {
             logger.error(e.getMessage());
             throw new CustomerException("登录失败");
@@ -58,12 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 用户名不重复返回true 重复返回false
+     * 用户名不重复返回null 重复抛出异常
      * @param username
      */
     @Override
-    public NormalResultDTO verify(String username) {
-        NormalResultDTO result = new NormalResultDTO("9999", "unknow error", null);
+    public UserDO verify(String username) {
         UserDO user = null;
         try {
             user = userDao.findByUsername(username);
@@ -72,16 +68,12 @@ public class UserServiceImpl implements UserService {
             throw new CustomerException("not unique username");
         }
         if (user == null){
-            result.setCode("0000");
-            result.setMessage("successful");
-            return result;
+            return null;
         }
         if (username.equals(user.getUsername())) {
             throw new CustomerException("not unique username");
         }else {
-            result.setCode("0000");
-            result.setMessage("successful");
-            return result;
+            return null;
         }
     }
 
@@ -90,17 +82,14 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
-    public NormalResultDTO addUser(UserDO user) {
-        NormalResultDTO result = new NormalResultDTO("9999", "unknow error", null);
+    public UserDO addUser(UserDO user) {
         try {
             userDao.save(user);
-            result.setCode("0000");
-            result.setMessage("successful");
         }catch (Exception e) {
             logger.error(e.getMessage());
             throw new CustomerException("modify failed");
         }
-        return result;
+        return user;
     }
 
     /**
