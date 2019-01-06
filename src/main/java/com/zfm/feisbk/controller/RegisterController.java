@@ -44,45 +44,18 @@ public class RegisterController {
 
     /**
      * 注册用户
-     * @param username
-     * @param password
-     * @param name
-     * @param tel
-     * @param email
-     * @param address
-     * @param sex
-     * @param birthday
-     * @param desciption
      */
     @RequestMapping(path = "/register.action", method = RequestMethod.POST)
-    public NormalResultDTO register(@RequestParam("username") String username,
-                                    @RequestParam("password") String password,
-                                    @RequestParam("name") String name,
-                                    @RequestParam("tel") String tel,
-                                    @RequestParam("email") String email,
-                                    @RequestParam("address") String address,
-                                    @RequestParam("sex") Short sex,
-                                    @RequestParam("birthday") Long birthday,
-                                    @RequestParam("description") String desciption) {
+    public NormalResultDTO register(UserDO user) {
         NormalResultDTO result = new NormalResultDTO("9999","not unique username",null);
         try {
-            NormalResultDTO verify = userService.verify(username);
+            NormalResultDTO verify = userService.verify(user.getName());
             if (verify.getCode().equals("0000")) {
                 result.setCode("0000");
                 result.setMessage("successful");
             }else {
                 return result;
             }
-            UserDO user = new UserDO();
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setName(name);
-            user.setTel(tel);
-            user.setEmail(email);
-            user.setAddress(address);
-            user.setSex(sex);
-            user.setBirthday(birthday);
-            user.setDescription(desciption);
             Long current = TimeUtils.getNow();
             user.setCreateTime(current);
             user.setModifyTime(current);

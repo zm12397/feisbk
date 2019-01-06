@@ -90,6 +90,7 @@ public class RecommendServiceImpl implements RecommendService{
             friendUsers.add(endNode);
         }
         friendUsers.removeAll(followedUsers);
+        friendUsers.remove(user);
         logger.info(friendUsers.toString());
         return friendUsers;
     }

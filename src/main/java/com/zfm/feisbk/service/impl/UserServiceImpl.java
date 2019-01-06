@@ -30,30 +30,27 @@ public class UserServiceImpl implements UserService {
      * @param password
      */
     @Override
-    public NormalResultDTO login(String username, String password) {
-        NormalResultDTO result = new NormalResultDTO("9999", "unknow error", null);
+    public UserDO login(String username, String password) {
         UserDO user = null;
         try {
             user = userDao.findByUsername(username);
         }catch (Exception e) {
             logger.error(e.getMessage());
-            throw new CustomerException("no such user");
+            throw new CustomerException("用户名不存在");
         }
         if (user == null) {
-            throw new CustomerException("no such user");
+            throw new CustomerException("用户名不存在");
         }
-        try {
-            if (password.equals(user.getPassword()) && username.equals(user.getUsername())) {
-                result.setCode("0000");
-                result.setMessage("successful");
-                return result;
+        if (password.equals(user.getPassword())) {
+            if(user.getState() == 2){
+                throw new CustomerException("用户已被注销");
             }
-            else
-                return result;
-        }catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new CustomerException("登录失败");
+            return user;
+        }else{
+            throw new CustomerException("密码不正确");
         }
+
+
 
     }
 
@@ -156,5 +153,42 @@ public class UserServiceImpl implements UserService {
             throw new CustomerException("no such user");
         }
         return user;
+    }
+
+    @Override
+    public void updateUser(UserDO user) {
+        System.out.println(user);
+        UserDO userDO = null;
+        try{
+            userDO = userDao.findOne(user.getId());
+        }catch (Exception e){
+            logger.error("用户查询失败，数据库查询错误：" + e.getMessage());
+            throw new CustomerException("用户查询失败");
+        }
+        if(user.getPassword() != null){
+            userDO.setPassword(user.getPassword());
+        }else if(user.getName() != null){
+            userDO.setName(user.getName());
+        }else if(user.getTel() != null){
+            userDO.setTel(user.getTel());
+        }else if(user.getEmail() != null){
+            userDO.setEmail(user.getEmail());
+        }else if(user.getAddress() != null){
+            userDO.setAddress(user.getAddress());
+        }else if(user.getSex() != null && user.getSex() != 0){
+
+            userDO.setSex(user.getSex());
+        }else if(user.getDescription() != null){
+            userDO.setDescription(user.getDescription());
+        }else if(user.getState() != null && user.getState() != 0){
+            userDO.setState(user.getState());
+        }
+        System.out.println("user = [" + userDO + "]");
+        try{
+            userDao.save(userDO);
+        }catch (Exception e) {
+            logger.error("用户更新失败，数据库更新错误：" + e.getMessage());
+            throw new CustomerException("用户更新失败");
+        }
     }
 }

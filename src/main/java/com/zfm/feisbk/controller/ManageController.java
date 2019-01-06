@@ -113,66 +113,16 @@ public class ManageController {
 
     /**
      * 修改用户信息
-     * @param username
-     * @param password
-     * @param name
-     * @param tel
-     * @param email
-     * @param address
-     * @param sex
-     * @param birthday
-     * @param desciption
      */
     @RequestMapping(value = "/updateuser.action", method = RequestMethod.POST)
-    public NormalResultDTO modifyUser(@RequestParam("id") Long id,
-                                      @RequestParam(value = "username", required = false) String username,
-                                      @RequestParam(value = "password", required = false) String password,
-                                      @RequestParam(value = "name",required = false) String name,
-                                      @RequestParam(value = "tel", required = false) String tel,
-                                      @RequestParam(value = "email",required = false) String email,
-                                      @RequestParam(value = "address", required = false) String address,
-                                      @RequestParam(value = "sex", required = false) Short sex,
-                                      @RequestParam(value = "birthday", required = false) Long birthday,
-                                      @RequestParam(value = "description", required = false) String description,
-                                      @RequestParam(value = "state", required = false) Short state) {
+    public NormalResultDTO modifyUser(UserDO user) {
+        System.out.println("user = [" + user + "]");
         NormalResultDTO result = new NormalResultDTO("9999","not such user",null);
         try {
-            Long current = TimeUtils.getNow();
-            UserDO user = userService.findUserById(id);
+//            UserDO user = userService.findUserById(theuser.getId());
             result.setCode("0000");
             result.setMessage("successful");
-            if (username != null) {
-                user.setUsername(username);
-            }
-            if (password != null) {
-                user.setPassword(password);
-            }
-            if (name != null) {
-                user.setName(name);
-            }
-            if (tel != null) {
-                user.setTel(tel);
-            }
-            if (email != null) {
-                user.setEmail(email);
-            }
-            if (address != null) {
-                user.setAddress(address);
-            }
-            if (sex != null) {
-                user.setSex(sex);
-            }
-            if (birthday != null) {
-                user.setBirthday(birthday);
-            }
-            if (description != null) {
-                user.setDescription(description);
-            }
-            if (state != null) {
-                user.setState(state);
-            }
-            user.setModifyTime(current);
-            userService.addUser(user);
+            userService.updateUser(user);
         }catch (CustomerException e) {
             result.setMessage(e.getMessage());
         }

@@ -63,76 +63,12 @@ public class FollowServiceImpl implements FollowService {
 
     @Override
     public void deleteFollow(Long followerId, Long followedId) {
-        UserDO follower = null;
         try{
-            follower =  userDao.findOne(followerId);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            throw new CustomerException("找不到当前用户");
-        }
-        if(follower == null){
-            throw new CustomerException("找不到当前用户");
-        }
-        UserDO followed = null;
-        try{
-            followed =  userDao.findOne(followedId);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            throw new CustomerException("找不到取关用户");
-        }
-        if(followed == null){
-            throw new CustomerException("找不到取关用户");
-        }
-
-
-        Set<TofollowDO> followeds;//当前用户的关注关系集合
-        Set<BefollowDO> followers;//取关的用户的被关注集合
-        //获取当前用户的关注关系集合
-        try{
-            followeds = follower.getFolloweds();
+            toFollowDao.deleteByStartAndEnd(followerId,followedId);
+            beFollowDao.deleteByStartAndEnd(followedId,followerId);
         }catch (Exception e){
             logger.info(e.getMessage());
-            throw new CustomerException("查询关注关系失败");
-        }
-        //如果当前用户没有关注别人，那就取关不了
-        if(followeds == null || followeds.isEmpty()){
-            throw new CustomerException("找不到取关对应的关注关系");
-        }
-        TofollowDO deleteTofollowDo = null;
-        //遍历当前用户的关注关系
-        for(TofollowDO myFollowed : followeds) {
-            if (myFollowed.getEndNode().equals(followed))
-                deleteTofollowDo = myFollowed;
-        }
-        if (deleteTofollowDo==null)
-            throw new CustomerException("找不到取关对应的关注关系");
-
-
-        try{
-            followers = followed.getFollowers();
-        }catch (Exception e){
-            logger.info(e.getMessage());
-            throw new CustomerException("查询被关注关系失败");
-        }
-        //如果取关用户没有粉丝，取关不了
-        if(followers == null || followers.isEmpty()){
-            throw new CustomerException("找不到取关对应的被关注关系");
-        }
-        BefollowDO deleteBefollowDo = null;
-        //遍历取关用户的被关注关系
-        for(BefollowDO myFollower : followers) {
-            if (myFollower.getEndNode().equals(follower))
-                deleteBefollowDo = myFollower;
-        }
-        if (deleteBefollowDo==null)
-            throw new CustomerException("找不到取关对应的被关注关系");
-
-        try{
-            toFollowDao.delete(deleteTofollowDo);
-            beFollowDao.delete(deleteBefollowDo);
-        } catch (Exception e){
-            logger.error(e.getMessage());
-            throw new CustomerException("取关失败");
+            throw new CustomerException("取消关注失败");
         }
 
     }
@@ -150,7 +86,12 @@ public class FollowServiceImpl implements FollowService {
             throw new CustomerException("找不到当前用户");
         }
         List<UserDO> followers = new ArrayList<>();//当前用户的粉丝列表
-        List<BefollowDO> befollowDOList = new ArrayList<>(userDO.getFollowers());//当前用户的被关注关系列表
+        Set<BefollowDO> befollowDOSet= null;
+        befollowDOSet = userDO.getFollowers();
+        if (befollowDOSet==null){
+            return followers;
+        }
+        List<BefollowDO> befollowDOList = new ArrayList<>(befollowDOSet);//当前用户的被关注关系列表
         //对当前用户的被关注关系按关注时间排序，时间近的在前面
         Collections.sort(befollowDOList, new Comparator<BefollowDO>() {
             @Override
@@ -175,7 +116,6 @@ public class FollowServiceImpl implements FollowService {
                 throw new CustomerException("查询粉丝失败");
             }
             logger.info("endnode:" + endNode.toString());
-            logger.info("endNode:" + endNode.toString());
             followers.add(endNode);
         }
         return followers;
@@ -194,7 +134,12 @@ public class FollowServiceImpl implements FollowService {
             throw new CustomerException("找不到当前用户");
         }
         List<UserDO> followeds = new ArrayList<>();//当前用户的关注列表
-        List<TofollowDO> tofollowDOList = new ArrayList<>(userDO.getFolloweds());
+        Set<TofollowDO> tofollowDOSet= null;
+        tofollowDOSet = userDO.getFolloweds();
+        if (tofollowDOSet==null){
+            return followeds;
+        }
+        List<TofollowDO> tofollowDOList = new ArrayList<>(tofollowDOSet);
         //对当前用户的关注关系按关注时间排序，时间近的在前面
         Collections.sort(tofollowDOList, new Comparator<TofollowDO>() {
             @Override

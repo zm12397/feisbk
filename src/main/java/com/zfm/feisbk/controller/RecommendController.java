@@ -27,8 +27,8 @@ public class RecommendController {
     public NormalResultDTO add(HttpSession session) {
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         UserDO user = null;
-//        Long id = (Long) session.getAttribute("userid");
-        Long id = 76l;
+        Long id = (Long) session.getAttribute("userid");
+//        Long id = 76l;
         try{
             Set<UserDO> friendSfriends = recommendService.getFriendSFriends(id);
             result.setCode("0000");

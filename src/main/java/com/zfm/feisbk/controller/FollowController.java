@@ -28,9 +28,9 @@ public class FollowController {
 
     @RequestMapping(path = "/follow.action", method = RequestMethod.POST)
     public NormalResultDTO follow(Long id) {
-//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
-        Long userId = (Long) request.getSession().getAttribute("User");
+        Long userId = (Long) request.getSession().getAttribute("userid");
+
         try{
             followService.addFollow(userId,id);
             result.setCode("0000");
@@ -43,9 +43,9 @@ public class FollowController {
 
     @RequestMapping(path = "/unfollow.action", method = RequestMethod.POST)
     public NormalResultDTO unfollow(Long id) {
-//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
-        Long userId = (Long) request.getSession().getAttribute("User");
+        Long userId = (Long) request.getSession().getAttribute("userid");
+        System.out.println("id = [" + id + "]");
         try{
             followService.deleteFollow(userId,id);
             result.setCode("0000");
@@ -57,10 +57,8 @@ public class FollowController {
     }
 
     @RequestMapping(path = "/get.action", method = RequestMethod.GET)
-    public NormalResultDTO unfollow(String username) {
-//        request.getSession().setAttribute("User",Long.valueOf(34));
+    public NormalResultDTO get(String username) {
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
-        Long userId = (Long) request.getSession().getAttribute("User");
         try{
             List<UserDO> userList = followService.getAllUserByUsername(username);
             if (userList==null||userList.size()==0){
@@ -78,9 +76,8 @@ public class FollowController {
 
     @RequestMapping(path = "/getbe.action", method = RequestMethod.GET)
     public NormalResultDTO getFollowers() {
-//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
-        Long userId = (Long) request.getSession().getAttribute("User");
+        Long userId = (Long) request.getSession().getAttribute("userid");
         try{
             List<UserDO> userFollowers = followService.getFollowers(userId);
             result.setData(userFollowers);
@@ -93,9 +90,8 @@ public class FollowController {
     }
     @RequestMapping(path = "/getto.action", method = RequestMethod.GET)
     public NormalResultDTO getFolloweds() {
-//        request.getSession().setAttribute("User",Long.valueOf(34));
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
-        Long userId = (Long) request.getSession().getAttribute("User");
+        Long userId = (Long) request.getSession().getAttribute("userid");
         try{
             result.setData(followService.getFolloweds(userId));
             result.setCode("0000");

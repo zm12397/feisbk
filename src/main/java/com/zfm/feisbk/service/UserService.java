@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
  * @date 2018/12/24 10:25
  */
 public interface UserService {
-    NormalResultDTO login(String username, String password);
+    UserDO login(String username, String password);
 
     NormalResultDTO verify(String username);
 
@@ -21,4 +21,6 @@ public interface UserService {
     Long getUserSize();
 
     UserDO findUserById(Long id);
+
+    void updateUser(UserDO user);
 }

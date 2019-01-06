@@ -19,14 +19,14 @@ public class UserDO {
 	private String tel;
 	private String email;
 	private String address;
-	private Short sex;			//0男 1女
+	private Short sex;			//1男 2女
 	private Long birthday;
 	private String description;	//个人描述的一句话，或者个性签名
 
 	private Long createTime;	//创建时间
 	private Long modifyTime;	//修改时间
 
-	private Short state;		//用户状态 1激活 0禁用
+	private Short state;		//用户状态 1激活 2禁用
 
 	@Relationship(type = "TOFOLLOW")
 	private Set<TofollowDO> followeds;

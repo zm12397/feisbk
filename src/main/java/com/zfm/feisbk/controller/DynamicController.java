@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: zhouchi
@@ -41,12 +41,27 @@ public class DynamicController {
     public NormalResultDTO getBlogList(HttpSession session){
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         UserDO user = null;
-//        Long id = (Long) session.getAttribute("userid");
-        Long id = 39l;
+        Long id = (Long) session.getAttribute("userid");
+//        Long id = 39l;
 
         try{
             user = dynamicService.findById(id);
-            Set<BlogDO> blogList = dynamicService.getBlogList(user);
+            List<Map<String, Object>> blogList = dynamicService.getBlogList(user);
+
+            //对bloglist对创建时间进行逆序排序
+            Collections.sort(blogList, new Comparator<Map>() {
+                @Override
+                public int compare(Map o1, Map o2) {
+                    long c1 = Long.valueOf(o1.get("createTime").toString());
+                    long c2 = Long.valueOf(o2.get("createTime").toString());
+                    if(c1 > c2){
+                        return -1;
+                    }else{
+                        return 1;
+                    }
+                }
+            });
+
             result.setCode("0000");
             result.setMessage("successful");
             result.setData(blogList);
@@ -60,14 +75,22 @@ public class DynamicController {
     public NormalResultDTO getSpecificUserBlog(HttpSession session, String id){
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
         UserDO user = null;
-        Long userid = Long.parseLong(id);
+        Long userid;
+
+        if(id == null || id.isEmpty()){
+            userid = (Long) session.getAttribute("userid");
+        }else {
+            userid = Long.parseLong(id);
+        }
 
         try{
             user = dynamicService.findById(userid);
-            Set<BlogDO> blogList = dynamicService.getSpecificBlogList(user);
+//            List<BlogDO> blogList = dynamicService.getSpecificBlogList(user);
+            Map<String, Object> userInfo = dynamicService.getSpecificUserInfo(user);
             result.setCode("0000");
             result.setMessage("successful");
-            result.setData(blogList);
+            result.setData(userInfo);
+//            result.setData(blogList);
         }catch (CustomerException e){
             result.setMessage(e.getMessage());
         }
@@ -78,7 +101,7 @@ public class DynamicController {
     public NormalResultDTO postBlog(HttpSession session, String contentTest, String contentImage) {
         NormalResultDTO result = new NormalResultDTO("9999", "unknow error", null);
 //        Long id = (Long) session.getAttribute("userid");
-        Long id = 39l;
+        Long id = (Long) session.getAttribute("userid");
         UserDO user = null;
 
         try {
@@ -114,16 +137,15 @@ public class DynamicController {
             // 获取项目所在绝对路径
             String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()/* "D:\\workspace\\web-workspace2\\Gleaning\\src\\main\\resources" */;
 
-            Long id = 39l;
+            Long id = (Long) session.getAttribute("userid");
 //            Long id = (Long) session.getAttribute("userid");
             Long timeStamp = System.currentTimeMillis();
             String url = path + USER_IMG_UPLOAD_PATH +  id.toString() + '_' + timeStamp.toString();
             image.transferTo(new File(url + '.' + extname));
 
-
             result.setCode("0000");
             result.setMessage("successful");
-            result.setData(USER_IMG_UPLOAD_PATH +  id.toString() + '_' + timeStamp.toString() + '.' + extname);
+            result.setData("blogimgs/" +  id.toString() + '_' + timeStamp.toString() + '.' + extname);
 
         }catch (CustomerException e){
             result.setMessage(e.getMessage());

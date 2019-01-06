@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>注册界面</title>
+    <!-- Loading Bootstrap -->
+    <!--link rel="stylesheet" type="text/css" href="../css/login.css"-->
+    <!-- Loading Flat UI -->
+    <link rel="stylesheet" type="text/css" href="../css/register.css" th:href="@{css/register.css}">
+    <link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet"  th:href="@{css/bootstrap.min.css}"/>
+    <!--@*1、组件引用*@@-->
+    <script src="../js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+    <script src="../js/ajaxfileupload.js" th:src="@{js/ajaxfileupload.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+    <script language="JavaScript" src="../js/register.js" th:src="@{js/register.js}"></script>
+</head>
+<body>
+<h1>社交平台</h1>
+<form>
+    <div class="box">
+        <h2>用户注册</h2>
+        <div id="error_box"></div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入用户名" id="username" name="username"/>
+        </div>
+        <div class="input_box">
+            <input type="password" placeholder="请输入密码" id="password" name="password"/>
+        </div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入真实姓名" id="name" name="name"/>
+        </div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入电话" id="tel" name="tel"/>
+        </div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入邮件" id="email" name="email"/>
+        </div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入地址" id="address" name="address"/>
+        </div>
+        <div class="rdo">
+            <div class="input_rdo">
+            请选择性别&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="1" checked>男
+            <input type="radio" name="sex" value="2">女
+            </div>
+       </div>
+        <div class="bir">
+            <div class="input_bir" >
+          请选择出生日期&nbsp;&nbsp;&nbsp;<input type="date" id="birthday" name="birthday"/>
+              </div>
+          </div>
+        <div class="input_box">
+            <input type="text" placeholder="请输入描述" id="description" name="description"/>
+        </div>
+        <div class="input_box">
+            <!-- type="button"这里的要这样写不让页面会默认为type="submit"，ajax 提交时页面是不用刷新页面的   而表单提交需要刷新，这里我们是不用刷新色-->
+            <span style="color:#FF6666;">  <button id="register" type="button">注册</button></span>
+        </div>
+    </div>
+</form>
+</body>
+</html>

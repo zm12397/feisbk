@@ -29,6 +29,8 @@ public class App extends SpringBootServletInitializer {
 
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
+//		ToFollowDao toFollowDao = context.getBean(ToFollowDao.class);
+//		toFollowDao.deleteByStartAndEnd(96l,76l);
 //		UserDao userDao = context.getBean(UserDao.class);
 
 //		System.out.println(user);
@@ -59,6 +61,14 @@ public class App extends SpringBootServletInitializer {
 
 //		UserDO wlf = userDao.findOne(96l);
 //		System.out.println(wlf);
+//		UserDO user = new UserDO();
+//		user.setUsername("volleyfo");
+//		user.setPassword("123");
+//		userDao.save(user);
+//		UserDO user2 = new UserDO();
+//		user2.setUsername("zfm");
+//		user2.setPassword("123");
+//		userDao.save(user2);
 	}
 
 }
