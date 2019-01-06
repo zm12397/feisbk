@@ -19,8 +19,8 @@ function load() {
                 $('.follow_btn').text("已关注")
             }
 
-            $(document).attr("title",res.data.username+"的主页");
-            $('#friend_name').text(res.data.username);
+            $(document).attr("title",res.data.name+"的主页");
+            $('#friend_name').text(res.data.name);
             if(res.data.address!=null) {
                 $('#friend_info li:nth-child(1) .personal_item_desc').text(res.data.address);
             }else{
@@ -49,7 +49,7 @@ function load() {
                     optionString += '<div class="content">'
                         + '<div class="face"><img src="image/tx.jpg" class="face_photo"></div>'
                         + '<div class="detail">'
-                        + '<div class="name"><h4 class="txt1">' + res.data.username + '</h4></div>'
+                        + '<div class="name"><h4 class="txt1">' + res.data.name + '</h4></div>'
                         + '<div class="time"><h5 class="stime">' + commonTime + '</h5></div>'
                         + '<div><p class="text">' + blogList[i].contentTest + '</p></div>'
                         + '<div class="image"><img src="' + url + '" width="450px" height="300px" class="maomao"></div>'

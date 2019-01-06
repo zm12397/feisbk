@@ -25,7 +25,7 @@ function recommend_load() {
                         + '</div><div class="recommend_item_follow follow_btn" id="rc_'+data.data[i].id + '">关注</div>'
                         + '<div class="recommend_item_info" onclick=gotoFriend('+ data.data[i].id + ','+0+ ')>'
                         + '<div class="recommend_item_name txt1">'
-                        + data.data[i].username
+                        + data.data[i].name
                         + '</div>'
                         + '<div class="recommend_item_desc">'
                         + data.data[i].description
@@ -80,7 +80,7 @@ function followed_load() {
                     optionString += '</div>'
                         + '<div class="recommend_item_info" onclick=gotoFriend('+ data.data[i].id + ','+1+ ')>'
                         + '<div class="recommend_item_name txt1">'
-                        + data.data[i].username
+                        + data.data[i].name
                         + '</div>'
                         + '<div class="recommend_item_desc">'
                         + data.data[i].description
@@ -137,7 +137,7 @@ function follower_load() {
                     optionString += '</div>'
                         + '<div class="recommend_item_info" onclick=gotoFriend('+ data.data[i].id + ','+state+ ')>'
                         + '<div class="recommend_item_name txt1">'
-                        + data.data[i].username
+                        + data.data[i].name
                         + '</div>'
                         + '<div class="recommend_item_desc">'
                         + data.data[i].description
@@ -174,7 +174,7 @@ function blog_load() {
                     optionString += '<div class="content">'
                         + '<div class="face"><img src="image/tx.jpg" class="face_photo"></div>'
                         + '<div class="detail">'
-                        + '<div class="name"><h4 class="txt1">' + res.data[i].username + '</h4></div>'
+                        + '<div class="name"><h4 class="txt1">' + res.data[i].name + '</h4></div>'
                         + '<div class="time"><h5 class="stime">' + commonTime + '</h5></div>'
                         + '<div><p class="text">' + res.data[i].contentTest + '</p></div>'
                         + '<div class="image"><img src="' + url + '" width="450px" height="300px" class="maomao"></div>'
@@ -221,7 +221,7 @@ function getUserInfo() {
         async: false,
         success: function (res) {
             my_id = res.data.id;
-            $('#my_name').text(res.data.username);
+            $('#my_name').text(res.data.name);
             if(res.data.address!=null) {
                 $('#my_info li:nth-child(1) .personal_item_desc').text(res.data.address);
             }else{
@@ -251,7 +251,7 @@ function getUserInfo() {
                     optionString += '<div class="content">'
                         + '<div class="face"><img src="image/tx.jpg" class="face_photo"></div>'
                         + '<div class="detail">'
-                        + '<div class="name"><h4 class="txt1">' + res.data.username + '</h4></div>'
+                        + '<div class="name"><h4 class="txt1">' + res.data.name + '</h4></div>'
                         + '<div class="time"><h5 class="stime">' + commonTime + '</h5></div>'
                         + '<div><p class="text">' + blogList[i].contentTest + '</p></div>'
                         + '<div class="image"><img src="' + url + '" width="450px" height="300px" class="maomao"></div>'
@@ -274,11 +274,11 @@ function gotoFriend(id,state) {
 
 //搜索按钮事件
 function doSearch() {
-    var username = $("#s_input").val();
+    var name = $("#s_input").val();
     $('#my_search_list li').remove();
     $.ajax({
-        url: "follow/get.action",
-        data: {"username": username},
+        url: "follow/search.action",
+        data: {"name": name},
         type: 'get',
         dataType: 'JSON',
         success: function (data) {
@@ -294,7 +294,7 @@ function doSearch() {
                         + '</div><div class="recommend_item_follow follow_btn" id="sc_'+data.data[i].id+'">关注</div>'
                         + '<div class="recommend_item_info" onclick=gotoFriend('+ data.data[i].id + ','+0+')>'
                         + '<div class="recommend_item_name txt1">'
-                        + data.data[i].username
+                        + data.data[i].name
                         + '</div>'
                         + '<div class="recommend_item_desc">'
                         + data.data[i].description

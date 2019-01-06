@@ -192,4 +192,26 @@ public class FollowServiceImpl implements FollowService {
         }
         return list;
     }
+
+    @Override
+    public List<UserDO> getUsers(String name) {
+        List<UserDO> list = null;//模糊查询的用户列表
+        try {
+            String query  = ".*"+name+".*";//模糊查询正则
+            list = new ArrayList<>(userDao.findByNameIsLike(query));
+            logger.info(list.toString());
+        } catch (Exception e){
+            logger.error(e.getMessage());
+            throw new CustomerException("查询用户失败");
+        }
+        if (list==null)
+            throw new CustomerException("查询用户失败");
+        for (UserDO userDO : list){
+            if (userDO.getFollowers()!=null)
+                userDO.getFollowers().clear();
+            if (userDO.getFolloweds()!=null)
+                userDO.getFolloweds().clear();
+        }
+        return list;
+    }
 }

@@ -26,7 +26,11 @@ $(document).ready(function(){
             success : function(json) {
                 if(json.code==0000) {
                     alert("登录成功，点击前往主页..");
-                    window.location.href = "my_homepage.html";
+                    if(username == 'admin'){
+                        window.location.href = "user-management";
+                    }else{
+                        window.location.href = "my_homepage";
+                    }
                 }
                 else if(json.code==9999){
                     alert(json.message);

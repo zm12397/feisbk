@@ -14,4 +14,7 @@ public interface UserDao extends Neo4jRepository<UserDO,Long> {
 
 	@Query("MATCH (user:UserDO) where user.username=~{query} RETURN user")
 	Collection<UserDO> findUserDOByUsernameIsLike(@Param("query") String query);
+
+	@Query("MATCH (user:UserDO) where user.name=~{query} RETURN user")
+	Collection<UserDO> findByNameIsLike(@Param("query") String query);
 }

@@ -1,37 +1,83 @@
-
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>主页</title>
-<meta name="viewport"
-	content="width=divice-width,intital-scale=1,maximum-scale=1,user-scalable=no"></meta>
-<meta charset="utf-8"></meta>
-<!-- <link th:href="@{css/bootstrap.min.css}" rel="stylesheet"></link>
-	<link th:href="@{css/.css}" rel="stylesheet"></link> -->
-<link href="../css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"
-	rel="stylesheet"></link>
-<style>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../css/homepage.css" th:href="@{css/homepage.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/mystyle.css}" href="../css/mystyle.css">
 
-</style>
 </head>
 <body>
-	<!--头部开始-->
+    <div class="header">
+        <div class="header_info">
+            <div class="tx">
+                <img src="image/tx.jpg" th:src="@{image/tx.jpg}" class="tx">
+            </div>
+            <div class="username">
+                <h1 class="user" id="friend_name"></h1>
+            </div>
+            <button class="btn follow_btn">关注</button>
+        </div>
+    </div>
+    <div class="main">
+        <div class="left">
+            <div class="personal_data">
+                <div class="block_header txt1">
+                    <div class="block_header_name">
+                        <a>个人简介</a>
+                    </div>
+                </div>
+                <div class="personal_info">
+                    <ul id="friend_info">
+                        <li class="personal_item">
+                            <span class="item_img">
+                                <img src="image/dingwei.png" >
+                            </span>
+                            <span class="personal_item_desc"></span>
+                        </li>
+                        <li class="personal_item">
+                            <span class="item_img">
+                                <img src="image/dangao.png">
+                            </span>
+                            <span class="personal_item_desc"></span>
+                        </li>
+                        <li class="personal_item">
+                            <span class="item_img">
+                                <img src="image/jianjie.png">
+                            </span>
+                            <span class="personal_item_desc"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content_section">
+            <div class="tab_div" id="friend_blog_list_tab">
+                <div class="block_header txt1">
+                    <div class="block_header_name">
+                        <a>ta的博客</a>
+                        <a class="block_header_icon" onclick="blog_load()"><img src="image/refresh.png"></a>
+                    </div>
+                </div>
+                <div id="friend_blog_list">
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div th:replace="head"></div>
-	<!--头部结束-->
-	
+    <div id="follow_select">
+        <a id="unfollow">取消关注</a>
+    </div>
 
-	<!--主要内容结束-->
-	<script th:src="@{js/jquery.min.js}" src="../js/jquery.min.js"></script>
-	<script th:src="@{js/bootstrap.min.js}" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		//<![CDATA[
-		$(document).ready(function() {
-
-		})
-		//]]>
-	</script>
+    <script th:src="@{js/jquery.min.js}" src="../js/jquery.min.js"></script>
+    <script th:src="@{js/bootstrap.min.js}" src="../js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" th:src="@{js/ajaxfileupload.js}" src="../js/ajaxfileupload.js"></script>-->
+    <script th:src="@{js/homepage.js}" src="../js/homepage.js"></script>
+    <script th:src="@{js/friend_homepage.js}" src="../js/friend_homepage.js"></script>
+    <script th:src="@{js/publish_blog.js}" src="../js/publish_blog.js"></script>
+    <script th:src="@{js/url_analysis.js}" src="../js/url_analysis.js"></script>
+    <script th:src="@{js/follow.js}" src="../js/follow.js"></script>
 </body>
 </html>

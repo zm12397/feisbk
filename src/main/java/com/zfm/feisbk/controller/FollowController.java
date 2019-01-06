@@ -74,6 +74,24 @@ public class FollowController {
         return result;
     }
 
+    @RequestMapping(path = "/search.action", method = RequestMethod.GET)
+    public NormalResultDTO search(String name) {
+        NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
+        try{
+            List<UserDO> userList = followService.getUsers(name);
+            if (userList==null||userList.size()==0){
+                result.setMessage("noTheseUserByQuery");
+                return result;
+            }
+            result.setData(userList);
+            result.setCode("0000");
+            result.setMessage("successful");
+        }catch (CustomerException e){
+            result.setMessage(e.getMessage());
+        }
+        return result;
+    }
+
     @RequestMapping(path = "/getbe.action", method = RequestMethod.GET)
     public NormalResultDTO getFollowers() {
         NormalResultDTO result = new NormalResultDTO("9999","unknow error",null);
