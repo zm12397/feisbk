@@ -17,8 +17,11 @@ spring:
     content-type: text/html
   data:
     neo4j:
-      uri: bolt://localhost:7687
-      username: test
-      password: test
+      uri: bolt://134.175.34.136:7687
+      username: neo4j
+      password: feisbk
+#      uri: bolt://localhost:7687
+#      username: test
+#      password: test
 server:
   context-path: /feisbook
