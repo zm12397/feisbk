@@ -1,83 +1,664 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link href="../css/homepage.css" th:href="@{css/homepage.css}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" th:href="@{css/mystyle.css}" href="../css/mystyle.css">
+    <title>我的feisbook</title>
+	<meta name="viewport" content="width=divice-width,intital-scale=1,maximum-scale=1,user-scalable=no"></meta>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        #main{width: 100%;min-height:932px; /*height: 100%;position: absolute; */background-image: url("image/body_bg_page.jpg");background-size: cover;background-repeat: no-repeat;}
+        *{margin: 0;padding: 0;}
+        /* div{border: 1px solid red;}  */
 
+        #banner{font-family: Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+                padding:32px;color: white;height:300px;width: 920px;margin: 0 auto;margin-top: 40px;
+                background-image: url("image/039.jpg");}
+        #toux{padding-top:10px;padding-bottom: 6px;}
+        #toux img{width: 100px;height: 100px;border-radius: 50%;}
+        #banner-info #name{font-size: 22px;font-weight: 400;text-shadow: 1px 1px 5px gray;}
+        #banner-info #description{font-size: 12px;text-shadow: 1px 1px 5px gray;}
+        #tab{box-shadow:rgba(0, 0, 0, 0.15) 0px 1px 1px 0px;height: 40px;width: 920px;
+            margin: 0 auto;background-color: white;margin-bottom: 16px;}
+        #tab>div{height: 40px;line-height: 40px;padding: 0;}
+        #search-name{position: relative;top:3px;width: 100%;border-radius: 0%;}
+        #search-name+span{position: relative;top:3px;border-radius: 0%;}
+
+        #content{width: 920px;margin: 0 auto;}
+        #left{width: 300px;margin-right:20px;}
+        #left-header{height:64px ;padding: 12px 0;background-color: white;color: #808080;font-size: 12px;margin-bottom: 16px;}
+        #left-header>div{border-left: 1px solid #d9d9d9;}
+        #left-header>div span{font-family: Tahoma;font-size: 18px;color: #333;}
+        #content li{border: none;}
+        #info li span.glyphicon{margin-right: 5px;color: #eb7350;}
+        #info li.title{height: 36px;line-height: 36px;border-bottom: 2px solid #d9d9d9;border-radius: 0%;padding-top: 0px;padding-bottom: 0px;font-weight: 600;}
+        #recommend li.title{height: 36px;line-height: 36px;padding-top: 0px;padding-bottom: 0px;font-weight: 600;
+            border-bottom: 1px solid #d9d9d9;border-radius: 0%;}
+
+        #recommend{background-color: white;padding-bottom: 10px;}
+        #recommend .media{padding: 0 10px;}
+        .media img.media-object{width: 50px;height: 50px;border-radius: 50%;}
+        /*#recommend .h5{}*/
+        #recommend .media h5{margin-bottom: 5px;margin-top: 5px;height: 20px;line-height: 20px;font-weight: 600;}
+        #recommend .media span{font-size: 12px;color: #808080;}
+        /*#recommend-list{margin-bottom: 10px;}*/
+
+        .follow-btn{border: 1px solid #d9d9d9;display: inline-block;width: 60px;height: 20px;line-height:20px;text-align: center;}
+
+        #right{width: 600px;}
+        #publish-blog{background-color: white;margin-bottom: 16px;padding: 0px 10px 10px 10px;}
+        #publish-blog h5{font-weight: 600;border-bottom: 1px solid #d9d9d9;height: 38px;line-height: 38px;margin-top: 0px;}
+        #publish-blog .addpic{background-image: url("image/pic.png")}
+        #publish-blog-btns{margin-left: 15px;}
+        #publish-blog-btns img{height: 100px;width: 100px;}
+        #publish-blog .dbot{margin-top: 10px;}
+        #publish-blog #publish-blog-btns button{width: 40px;height: 25px;padding: 0;border-radius: 0''}
+        #submit{width: 60px;height: 28px;padding: 0 10px;background-color:#ffc09f;color:white;border-radius: 0;border: 1px solid #ffc09f; }
+
+        .memeber-header{padding: 0 10px;font-size:14px;font-weight: 700;height: 45px;line-height: 45px;border-bottom: 1px solid #d9d9d9;}
+        .header-content{margin: 0 10px;}
+        .list-content{background-color: white;}
+        .member-list .media{margin: 15px 10px;border-bottom: 1px solid #d9d9d9;padding-bottom: 10px;}
+        .member-list .media h5{margin-top:10px;margin-bottom:8px; font-weight: 600;}
+            
+        .blog-text{margin-top: 10px;margin-left: 60px;margin-bottom: 6px;}
+        #blog-memeber-list .blog-img img{/*max-height: 350px;*/width: 326px;height: 244px;border: 1px solid #d9d9d9;}
+        #blog-memeber-list .blog-img{margin-left: 60px;}
+
+        .follow-btn:hover{cursor: pointer;color: #eb7350;}
+        .follow-btn{color: #808080;}
+
+        .show-btn:hover{cursor: pointer;color: #eb7350;}
+
+        #search-name{border-right: none;}
+        #search-btn{background-color: white;border-left: none;}
+    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header_info">
-            <div class="tx">
-                <img src="image/tx.jpg" th:src="@{image/tx.jpg}" class="tx">
+    <div id="main" class="container">
+        <div class="row">
+            <div id="banner" class="">
+                <div id="toux">
+                    <img class="center-block" src="image/default_avatar_male_uploading_180.gif" />
+                </div>
+                <div id="banner-info">
+                    <div id="name" class="center-block  text-center">张俸铭</div>
+                    <div id="description" class="center-block text-center">一句话介绍一下自己吧，让别人更了解你</div>
+                </div>
+                
             </div>
-            <div class="username">
-                <h1 class="user" id="friend_name"></h1>
-            </div>
-            <button class="btn follow_btn">关注</button>
-        </div>
-    </div>
-    <div class="main">
-        <div class="left">
-            <div class="personal_data">
-                <div class="block_header txt1">
-                    <div class="block_header_name">
-                        <a>个人简介</a>
+            <div id="tab">
+                <div class="col-sm-2 col-sm-offset-3 text-center show-btn" id="home">我的主页</div>
+                <div class="col-sm-2 text-center show-btn" id="show-publish">发布博客</div>
+                <div class="col-sm-3  col-sm-offset-1 text-center">
+                    <div class="input-group">
+                        <input type="text" id="search-name" class="form-control" placeholder="查询姓名" aria-describedby="basic-addon2">
+                        <span class="input-group-addon glyphicon glyphicon-search" id="search-btn"></span>
                     </div>
                 </div>
-                <div class="personal_info">
-                    <ul id="friend_info">
-                        <li class="personal_item">
-                            <span class="item_img">
-                                <img src="image/dingwei.png" >
-                            </span>
-                            <span class="personal_item_desc"></span>
-                        </li>
-                        <li class="personal_item">
-                            <span class="item_img">
-                                <img src="image/dangao.png">
-                            </span>
-                            <span class="personal_item_desc"></span>
-                        </li>
-                        <li class="personal_item">
-                            <span class="item_img">
-                                <img src="image/jianjie.png">
-                            </span>
-                            <span class="personal_item_desc"></span>
-                        </li>
+            </div>
+        </div>
+        <div id="content" class="row">
+            <div id="left" class="pull-left">
+                <div id="left-header">
+                    <div id="followeds" class="col-sm-4 text-center show-btn"><span id="followeds-num">0</span><br />关注</div>
+                    <div id="followers" class="col-sm-4 text-center show-btn"><span id="followers-num">0</span><br />粉丝</div>
+                    <div id="blogs" class="col-sm-4 text-center show-btn"><span id="blogs-num">0</span><br />微博</div>
+                </div>
+                <div id="info">
+                    <ul class="list-group">
+                        <li class="list-group-item title h5">个人信息</li>
+                        <li class="list-group-item"><span class="glyphicon glyphicon-map-marker info-list"></span><span id="info-address"></span></li>
+                        <li class="list-group-item"><span class="glyphicon glyphicon-phone info-list"></span><span id="info-tel"></span></li>
+                        <li class="list-group-item"><span class="glyphicon glyphicon-paperclip info-list"></span><span id="info-email"></span></li>
+                        <!--<li class="list-group-item"><span class="glyphicon glyphicon-text-size"></span>我是一只小小</li>-->
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div class="content_section">
-            <div class="tab_div" id="friend_blog_list_tab">
-                <div class="block_header txt1">
-                    <div class="block_header_name">
-                        <a>ta的博客</a>
-                        <a class="block_header_icon" onclick="blog_load()"><img src="image/refresh.png"></a>
+                <div id="recommend">
+                    <ul class="list-group">
+                        <li class="list-group-item title h5">好友推荐</li>
+                    </ul>
+                    <div id="recommend-list">
+
                     </div>
                 </div>
-                <div id="friend_blog_list">
+            </div>
+            <div id="right" class="pull-left">
+                <div id="publish-blog" class="dialog">
+                    <h5 class="dhead">随时随地分享新鲜事</h5>
+                    <div class="inputplace">
+                        <textarea id="input" class="form-control" contenteditable="true"></textarea>
+                    </div>
+                    <div class="dbot clearfix">
+                        <div id="blog-img" class="pull-left show-btn">
+                            <img src="image/pic.png">
+                        </div>
+                        <form id="uploadform" name="uploadform" enctype="multipart/form-data" style="display: none">
+                            <input id="img" type="file"  name="img"/>
+                        </form>
+                        <div id="publish-blog-btns" class="pull-left" style="display: none">
+                            <img id="show-img" src="image/cat.jpg"><br>
+                            <!--<button id="pic-upload" class="btn btn-default">上传</button>
+                            <button id="pic_cancel" class="btn btn-default">取消</button>-->
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-default" id="submit">发布</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="followed-memeber" class="list-content">
+                    <div class="memeber-header">
+                        <div class="header-content">
+                            全部关注<!-- <span id="followed-memeber-num">4</span> --><a id="followed-refresh" href="###" class="refresh pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
+                        </div>
+                    </div>
+                    <div class="member-list" id="followed-memeber-list">
+
+                    </div>
+                </div>
+                <div id="follower-memeber" class="list-content">
+                    <div class="memeber-header">
+                        <div class="header-content">
+                            粉丝列表<!-- <span id="followed-memeber-num">4</span> --><a id="follower-refresh" href="###" class="refresh pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
+                        </div>
+                    </div>
+                    <div class="member-list" id="follower-memeber-list">
+
+                    </div>
+                </div>
+                <div id="blog-memeber" class="list-content">
+                    <div class="memeber-header">
+                        <div class="header-content">
+                            <span id="blogs-header">我的动态</span><!-- <span id="followed-memeber-num">4</span> --><a id="blog-refresh" href="###" class="refresh pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
+                        </div>
+                    </div>
+                    <div class="member-list" id="blog-memeber-list">
+
+                    </div>
+                </div>
+                <div id="search-memeber" class="list-content">
+                    <div class="memeber-header">
+                        <div class="header-content">
+                            查询结果：共<span id="search-result-num">0</span>条<!-- <span id="followed-memeber-num">4</span> --><a id="search-refresh" href="###" class="refresh pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
+                        </div>
+                    </div>
+                    <div class="member-list" id="search-memeber-list">
+
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div id="follow_select">
-        <a id="unfollow">取消关注</a>
-    </div>
+    <script src="../js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/ajaxfileupload.js}" src="../js/ajaxfileupload.js"></script>
+    <script type="text/javascript" th:src="@{layer/layer.js}"></script>
+    <script>
+        $(document).on("click", ".follow-btn", function () {
+            var text = $(event.target).html();
+            var id = event.target.id.substring(3)
+            if(text=='关注'){
+                $.ajax({
+                    url: 'follow/follow.action',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {"id": id},
+                    async: false,
+                    success: function (data) {
+                        if (data.code == "0000") {
+                            $("#id_"+id).text('已关注')
+                            ldfolloweds()
+                            ldfollowers()
+                            ldrecommend()
+                            layer.msg("关注成功")
+                        } else {
+                            layer.msg(data.message)
+                            // alert(data.message);
+                        }
+                    }
+                });
+            }else if(text=='已关注' || text=='互粉'){
+                layer.confirm('如果取消关注，您将无法继续作为ta的粉丝', {
+                    title:"您将要取消对ta的关注",
+                    btn: ['狠心取消', '算了，再考虑考虑吧'] //可以无限个按钮
+                }, function(index, layero){
+                    //按钮【按钮一】的回调
+                    $.ajax({
+                        url: 'follow/unfollow.action',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {"id": id},
+                        async: false,
+                        success: function (data) {
+                            if (data.code == "0000") {
+                                $("#id_"+id).text('关注')
+                                ldfolloweds()
+                                ldfollowers()
+                                ldrecommend()
+                                layer.msg("成功取消关注")
+                            } else {
+                                layer.msg(data.message)
+                            }
+                        }
+                    });
+                    layer.close(index);
+                }, function(index){
+                    return;
+                    layer.close(index);
+                });
+            }else {
+                console.log($(this))
+            }
+        });
+        $().ready(function(){
+            var my_id
+            init()
+            $("#home").click(function () {
+                $("#followed-memeber").css("display","none")
+                $("#follower-memeber").css("display","none")
+                $("#blog-memeber").css("display","block")
+                $("#publish-blog").css("display","none")
+                $("#search-memeber").css("display","none")
+                rfblog()
+            })
+            $("#show-publish").click(function () {
+                $("#publish-blog").css("display","block")
+            })
+            $("#blog-refresh").click(function () {
+                $("#followed-memeber").css("display","none")
+                $("#follower-memeber").css("display","none")
+                $("#blog-memeber").css("display","block")
+                $("#publish-blog").css("display","none")
+                $("#search-memeber").css("display","none")
+                rfblog()
+                layer.msg("刷新成功")
+            })
+            $("#followed-refresh").click(function () {
+                ldfolloweds()
+                layer.msg("刷新成功")
+            })
+            $("#follower-refresh").click(function () {
+                ldfollowers()
+                layer.msg("刷新成功")
+            })
+            $("#search-btn").click(function () {
+                $("#followed-memeber").css("display","none")
+                $("#follower-memeber").css("display","none")
+                $("#blog-memeber").css("display","none")
+                $("#publish-blog").css("display","none")
+                $("#search-memeber").css("display","block")
 
-    <script th:src="@{js/jquery.min.js}" src="../js/jquery.min.js"></script>
-    <script th:src="@{js/bootstrap.min.js}" src="../js/bootstrap.min.js"></script>
-    <!--<script type="text/javascript" th:src="@{js/ajaxfileupload.js}" src="../js/ajaxfileupload.js"></script>-->
-    <script th:src="@{js/homepage.js}" src="../js/homepage.js"></script>
-    <script th:src="@{js/friend_homepage.js}" src="../js/friend_homepage.js"></script>
-    <script th:src="@{js/publish_blog.js}" src="../js/publish_blog.js"></script>
-    <script th:src="@{js/url_analysis.js}" src="../js/url_analysis.js"></script>
-    <script th:src="@{js/follow.js}" src="../js/follow.js"></script>
+                var name = $("#search-name").val()
+                $.ajax({
+                    url: "follow/search.action",
+                    data: {"name": name},
+                    type: 'get',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        console.log(data)
+                        var optionString = "";
+                        if (data.data != null) {
+                            var dataLength = data.data.length;
+                            $("#search-result-num").text(dataLength)
+                            // $('#search_result_count').text("搜索结果: 共" + dataLength + "条");
+                            for (var i = 0; i < dataLength; i++) {
+                                optionString += ("<div class=\"media\">\n" +
+                                    "                            <div class=\"media-left\">\n" +
+                                    "                                <a href=\"#\">\n" +
+                                    "                                    <img class=\"media-object\" src=\"image/default_avatar_male_uploading_180.gif\" alt=\"...\">\n" +
+                                    "                                </a>\n" +
+                                    "                            </div>\n" +
+                                    "                            <div class=\"media-body\">\n" +
+                                    "                                <h5 class=\"media-heading\"><span onclick='goto("+ data.data[i].id +",1)'>"+ data.data[i].name +"</span><div class=\"follow-btn pull-right\" id='id_"+ data.data[i].id +"'>关注</div></h5>\n" +
+                                    "                                <span>"+ data.data[i].description +"</span>\n" +
+                                    "                            </div>\n" +
+                                    "                        </div>")
+                            }
+                            $('#search-memeber-list').html(optionString);
+                            /*$("#blog_list_tab").hide();
+                            $("#followed_list_tab").hide();
+                            $("#follower_list_tab").hide();
+                            $('#search_list_tab').show();*/
+                        } else {
+                            $("#search-result-num").text(0)
+                            $('#search-memeber-list').html(optionString);
+                            /*$('#search_result_count').text("搜索结果: 共0条");
+                            optionString += '<li class=\"recommend_item\">没有搜索到呢，重新输入一下吧！</li>';
+                            $('#my_search_list').append(optionString);*/
+                        }
+                    },
+                    error: function (data) {
+                        layer.msg(data.message)
+                        // alert("search:"+data.message);
+                    }
+                });
+            })
+            $("#followeds").click(function (){
+                $("#followed-memeber").css("display","block")
+                $("#follower-memeber").css("display","none")
+                $("#blog-memeber").css("display","none")
+                $("#publish-blog").css("display","none")
+                $("#search-memeber").css("display","none")
+            })
+            $("#followers").click(function (){
+                $("#followed-memeber").css("display","none")
+                $("#follower-memeber").css("display","block")
+                $("#blog-memeber").css("display","none")
+                $("#publish-blog").css("display","none")
+                $("#search-memeber").css("display","none")
+            })
+            $("#blogs").click(function (){
+                init()
+                $("#blogs-header").text("我的动态")
+            })
+            $("#blog-img").click(function () {
+                $("#img").click()
+            })
+            $("#img").change(function () {
+                $.ajax({
+                    type:'POST',
+                    url:'dynamic/upload.action',
+                    data: new FormData($( "#uploadform" )[0]),
+                    contentType:false,
+                    processData:false,//这个很有必要，不然不行
+                    dataType:"JSON",
+                    success:function (res) {
+                        // alert('上传成功');
+                        $("#show-img").attr("src",res.data)
+                        layer.msg('图片上传成功')
+                        // console.log(res.data);
+                    },
+                    error:function () {
+                        layer.msg('图片上传失败')
+                        // alert("上传失败");
+                    }
+                });
+                $("#publish-blog-btns").css("display","block")
+            })
+            $("#submit").click(function () {
+                if($("#input").val()==""){
+                    layer.msg('发布内容不能为空')
+                    // alert("发布内容不能为空");
+                }else {
+                    $.ajax({
+                        url: 'dynamic/add.action',
+                        type: 'post',
+                        dataType: 'JSON',
+                        data: {contentTest: $("#input").val(), contentImage: $("#show-img").attr("src")},
+                        success: function (data) {
+                            if(data.code=="0000"){
+                                $("#input").val("");
+                                $("#show-img").attr("src","")
+                                $("#publish-blog-btns").css("display","none")
+                                init()
+                                layer.msg('发布动态成功，已经可以看到啦')
+                            }else{
+                                layer.msg(data.message)
+                            }
+                        },
+                        error: function (data) {
+                            layer.msg(data.message)
+                        }
+                    });
+                }
+            })
+
+        })
+
+        function goto(id,state){
+            layer.msg("正在前往该用户主页",function () {
+                window.open("./friend.html?id="+id+"&state="+state);
+            })
+        }
+
+        //博客时间格式化
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+
+        function init(){
+            $.ajax({
+                url: 'dynamic/info.action',
+                type: 'post',
+                data:{"id":null},
+                dataType: 'JSON',
+                async: false,
+                success: function (res) {
+                    my_id = res.data.id;
+                    $('#name').text(res.data.name);
+                    $('#description').text(res.data.description);
+
+                    if(res.data.address!=null) {
+                        $('#info-address').text(res.data.address);
+                    }else{
+                        $('#info-address').text("未填写地址");
+                    }
+                    if(res.data.tel!=null) {
+                        $('#info-tel').text(res.data.tel);
+                    }else{
+                        $('#info-tel').text("未填写手机号码");
+                    }
+                    if(res.data.email!=null) {
+                        $('#info-email').text(res.data.email);
+                    }else{
+                        $('#info-email').text("未填写邮箱地址");
+                    }
+
+                    var optionString = "";
+                    var blogList = res.data.blogList;
+                    if (blogList != null) {
+                        var dataLength = blogList.length;
+                        $('#blogs-num').text(dataLength);
+                        for (var i = 0; i < dataLength; i++) {
+                            var url = blogList[i].contentImage;
+                            // url = url.substring(7);
+                            var time = blogList[i].modifyTime;
+                            var commonTime = new Date(time).Format("yyyy年MM月dd日 hh:mm");
+
+                            optionString += ("<div class=\"media\">\n" +
+                                "<div class=\"media-left\">\n" +
+                                "<a href=\"#\">\n" +
+                                "<img class=\"media-object\" src=\"image/default_avatar_male_uploading_180.gif\" alt=\"...\">\n" +
+                                "</a>\n" +
+                                "</div>\n" +
+                                "<div class=\"media-body\">\n" +
+                                "<h5 class=\"media-heading\">"+ res.data.name +"</h5>\n" +
+                                "<span>"+commonTime+"</span>\n" +
+                                "</div>\n" +
+                                "<div class=\"blog-text\">" + blogList[i].contentTest +"</div>\n" +
+                                "<div class=\"blog-img\">\n" +
+                                "<img class=\"\" src=\""+url+"\" alt=\"\"/>\n" +
+                                "</div>\n" +
+                                "</div>")
+                        }
+                        $('#blog-memeber-list').html(optionString);
+                    } else {
+                        /*optionString += '<div class="content">写点什么记录一下生活吧！</div>';
+                        $('#my_blog_list').append(optionString);*/
+                    }
+                }
+
+            });
+            $("#followed-memeber").css("display","none")
+            $("#follower-memeber").css("display","none")
+            $("#blog-memeber").css("display","block")
+            $("#publish-blog").css("display","none")
+            $("#search-memeber").css("display","none")
+
+
+            ldfolloweds()
+            ldfollowers()
+            ldrecommend()
+        }
+
+        function ldfollowers() {
+            $.ajax({
+                url: 'follow/getbe.action',
+                type: 'get',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    var optionString = "";
+                    if (data.data != null) {
+                        // var flag = -1;
+                        var dataLength = data.data.length;
+                        $('#followers-num').text(dataLength);
+                        for (var i = 0; i < data.data.length; i++) {
+                            var followers = data.data[i].followers;
+                            var flag = 2;//可以关注
+                            for (var j in followers) {
+                                if (followers[j].endNode.id == my_id) {
+                                    flag = 1;//已经互关了
+                                    break;
+                                }
+                            }
+                            var text = "关注"
+                            var state = 1
+                            if (flag == 1) {
+                                text = "互粉"
+                                state = 2
+                            }
+                            optionString += ("<div class=\"media\">\n" +
+                                "                            <div class=\"media-left\">\n" +
+                                "                                <a href=\"#\">\n" +
+                                "                                    <img class=\"media-object\" src=\"image/default_avatar_male_uploading_180.gif\" alt=\"...\">\n" +
+                                "                                </a>\n" +
+                                "                            </div>\n" +
+                                "                            <div class=\"media-body\">\n" +
+                                "                                <h5 class=\"media-heading\"><span onclick='goto("+ data.data[i].id +","+state+")' >" + data.data[i].name + "</span><div class=\"follow-btn pull-right\" id='id_"+ data.data[i].id +"'>" + text + "</div></h5>\n" +
+                                "                                <span>"+data.data[i].description+"</span>\n" +
+                                "                            </div>\n" +
+                                "                        </div>")
+                        }
+                        $('#follower-memeber-list').html(optionString);
+                    } else {
+                        /*$('#show_follower strong').text(0);
+                        optionString += '<li class=\"recommend_item\">咦!怎么没有粉丝呀，多发点博客吸引粉丝吧！</li>';
+                        $('#my_follower_list').append(optionString);*/
+                    }
+                }
+            })
+        }
+
+        function ldfolloweds() {
+            $.ajax({
+                url: 'follow/getto.action',
+                type: 'get',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    var optionString = "";
+                    if (data.data != null) {
+                        var dataLength = data.data.length;
+                        // var flag = -1;
+                        $('#followeds-num').text(dataLength);
+                        for (var i = 0; i < dataLength; i++) {
+                            optionString += ("<div class=\"media\">\n" +
+                                "<div class=\"media-left\">\n" +
+                                "<a href=\"#\">\n" +
+                                "<img class=\"media-object\" src=\"image/default_avatar_male_uploading_180.gif\" alt=\"...\">\n" +
+                                "</a>\n" +
+                                "</div>\n" +
+                                "<div class=\"media-body\">\n" +
+                                "<h5 class=\"media-heading\"><span onclick='goto("+ data.data[i].id +",2)'>"+ data.data[i].name +"</span><div class=\"follow-btn pull-right\" id='id_"+ data.data[i].id +"'>已关注</div></h5>\n" +
+                                "<span>"+ data.data[i].description +"</span>\n" +
+                                "</div>\n" +
+                                "</div>")
+
+                        }
+                        $('#followed-memeber-list').html(optionString);
+                    } else {
+                        /*$('#show_followed strong').text(0);
+                        optionString += '<li class=\"recommend_item\">暂时没有关注的人，去找找有趣的人吧!</li>';
+                        $('#my_followed_list').append(optionString);*/
+                    }
+                }
+            });
+        }
+
+        function ldrecommend() {
+            $.ajax({
+                url: 'recommend/my.action',
+                type: 'get',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    var optionString = "";
+                    if(data.data!=null){
+                        for (var i = 0; i < data.data.length; i++) {
+                            optionString += ("<div class=\"media\">\n" +
+                    "                            <div class=\"media-left\">\n" +
+                    "                                <a href=\"#\">\n" +
+                    "                                    <img class=\"media-object\" src=\"image/default_avatar_male_uploading_180.gif\" alt=\"...\">\n" +
+                    "                                </a>\n" +
+                    "                            </div>\n" +
+                    "                            <div class=\"media-body\">\n" +
+                    "                                <h5 class=\"media-heading\"><span onclick='goto("+ data.data[i].id +",1)'>"+ data.data[i].name +"</span><div class=\"follow-btn pull-right\" id='id_"+ data.data[i].id +"'>关注</div></h5>\n" +
+                    "                                <span>"+ data.data[i].description +"</span>\n" +
+                    "                            </div>\n" +
+                    "                        </div>")
+                        }
+                        $('#recommend-list').html(optionString);
+                    }else {
+                        /*optionString += '<li class=\"recommend_item\">暂时没有推荐的人呐，去找找有趣的人吧!</li>';
+                        $('#my_recommend_list').append(optionString);*/
+                    }
+                }
+            });
+        }
+
+        function rfblog() {
+            $.ajax({
+                url: 'dynamic/init.action',
+                type: 'get',
+                data:{"id":null},
+                dataType: 'JSON',
+                async: false,
+                success: function (res) {
+                    console.log(res)
+                    var optionString = "";
+                    var dataLength = res.data.length;
+                    for (var i = 0; i < dataLength; i++) {
+                        var url = res.data[i].contentImage;
+                        var time = res.data[i].modifyTime;
+                        var commonTime = new Date(time).Format("yyyy年MM月dd日 hh:mm");
+                        optionString += ("<div class=\"media\">\n" +
+                            "<div class=\"media-left\">\n" +
+                            "<a href=\"#\">\n" +
+                            "<img class=\"media-object\" src=\"image/default_avatar_male_uploading_180.gif\" alt=\"...\">\n" +
+                            "</a>\n" +
+                            "</div>\n" +
+                            "<div class=\"media-body\">\n" +
+                            "<h5 class=\"media-heading\"  onclick='goto("+ res.data[i].userid +",2)'>"+res.data[i].name+"</h5>\n" +
+                            "<span>"+commonTime+"</span>\n" +
+                            "</div>\n" +
+                            "<div class=\"blog-text\">" + res.data[i].contentTest +"</div>\n" +
+                            "<div class=\"blog-img\">\n" +
+                            "<img class=\"\" src=\""+url+"\" alt=\"\"/>\n" +
+                            "</div>\n" +
+                            "</div>")
+                    }
+                    $('#blog-memeber-list').html(optionString);
+                }
+
+            });
+            $("#blogs-header").text("好友动态")
+        }
+    </script>
 </body>
 </html>

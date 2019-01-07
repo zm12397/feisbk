@@ -9,20 +9,6 @@ $(document).ready(function() {
 	}).blur(function(){
 		$("#l-password").css('display','none')
 	})
-	/*
-	 * $("#validate").focus(function(){
-	 * $("#l-validate").css('display','inline-block'); })
-	 * $("#validate").blur(function(){ if($(this).val() == ''){
-	 * $("#l-validate").css('display','none'); } })
-	 */
-
-	/*
-	 * $("#validateCode").click(function(){
-	 * $(this).prop("src",$(this).prop("src") + "?d=" + new Date()); })
-	 */
-	/*$("#register").click(function(){
-		window.location.href="register"; 
-	})*/
 	$("#login").click(function(){
 		$.ajax({
 			url : "login/login.action",
@@ -30,13 +16,16 @@ $(document).ready(function() {
 			method:"post",
 			dataType:"json",
 			success : function(result) {
-				
 				if(result.code == "0000"){
-					layer.msg(result.message+"。。。正在前往主页",function(){
-						window.location.href="index"; 
-					})
-					
-					
+					if($("#uname").val() == "admin"){
+                        layer.msg("登录成功。。。正在前往管理页",function(){
+                            window.location.href="user-management";
+                        })
+					}else{
+                        layer.msg("登录成功。。。正在前往主页",function(){
+                            window.location.href="index";
+                        })
+					}
 				}else{
 					layer.msg(result.message)
 				}

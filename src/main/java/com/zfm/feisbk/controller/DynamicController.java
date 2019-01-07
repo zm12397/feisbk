@@ -125,13 +125,13 @@ public class DynamicController {
     }
 
     @RequestMapping(path = "/upload.action", method = RequestMethod.POST)
-    public NormalResultDTO postImage(HttpSession session, MultipartFile image){
+    public NormalResultDTO postImage(HttpSession session, MultipartFile img){
         NormalResultDTO result = new NormalResultDTO("9999", "unknow error", null);
-        if (image.isEmpty() || StringUtils.isBlank(image.getOriginalFilename())) {
+        if (img == null || img.isEmpty() || StringUtils.isBlank(img.getOriginalFilename())) {
             result.setMessage("图片为空");
             return result;
         }
-        String extname = FilenameUtils.getExtension(image.getOriginalFilename());
+        String extname = FilenameUtils.getExtension(img.getOriginalFilename());
         try {
 
             // 获取项目所在绝对路径
@@ -141,7 +141,7 @@ public class DynamicController {
 //            Long id = (Long) session.getAttribute("userid");
             Long timeStamp = System.currentTimeMillis();
             String url = path + USER_IMG_UPLOAD_PATH +  id.toString() + '_' + timeStamp.toString();
-            image.transferTo(new File(url + '.' + extname));
+            img.transferTo(new File(url + '.' + extname));
 
             result.setCode("0000");
             result.setMessage("successful");

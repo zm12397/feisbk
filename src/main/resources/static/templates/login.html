@@ -1,40 +1,47 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>登陆界面</title>
-    <!-- Loading Bootstrap -->
-    <link href="../css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Loading Flat UI -->
-    <link rel="stylesheet" type="text/css" href="../css/login.css" th:href="@{css/login.css}">
-    <!--@*1、组件引用*@@-->
-    <script src="../js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
-    <script src="../js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
-    <script language="JavaScript" src="../js/mylogin.js" th:src="@{js/mylogin.js}"></script>
+	<title>登录</title>
+	<meta name="viewport" content="width=divice-width,intital-scale=1,maximum-scale=1,user-scalable=no"></meta>
+	<meta charset="utf-8"></meta>
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet"></link>
+	<link th:href="@{css/login.css}" rel="stylesheet"></link>
+<style>
+
+</style>
 </head>
 <body>
-<h1>社交平台</h1>
-<form>
-    <div class="box">
-        <h2>用户登录</h2>
-        <div id="error_box"></div>
-        <div class="input_box">
-            <input type="text" placeholder="请输入用户名" id="username" name="username"/>
-        </div>
-        <div class="input_box">
-            <input type="password" placeholder="请输入密码" id="password" name="password"/>
-        </div>
-        <div class="input_box">
-            <!-- type="button"这里的要这样写不让页面会默认为type="submit"，ajax 提交时页面是不用刷新页面的   而表单提交需要刷新，这里我们是不用刷新色-->
-            <span style="color:#FF6666;">  <button id="login" type="button">登录</button></span>
-        </div>
-        <div class="input_box">
-            <p class="p1 line">还没有账号，<a href="register.html">立即注册»</a></p>
-        </div>
-    </div>
-</form>
-
+	
+	<div id="title" class="container">
+		<div class="row">
+			<div id="t1" class="col-xs-2">Feisbook</div>
+			<div id="t2" class="col-xs-9">大型在线社交平台</div>
+			<div id="t3" class="col-xs-1"><a id="register" href="register" class="btn">注册</a></div>
+		</div>
+		
+	</div>
+	<div id="content">
+		<form class="form-horizontal" onsubmit="return false">
+			<div id="img"><img src="image/login-top.png" alt=""></img></div>
+			<div id="main">
+				<label id="l-uname" for="uname">用户名</label>
+				<input id="uname" type="text" placeholder="用户名" class="form-control" name="username"></input>
+				<br></br>
+				
+				<div id="pfather">
+					<label id="l-password" for="password">密码</label>
+					<input id="password" type="password" placeholder="密码" class="form-control" name="password"><a id="forget" href="forget">忘记密码？</a></input>
+				</div>
+				<br></br>
+				<button id="login" class="btn">登录</button>
+			</div>
+		</form>
+		
+	</div>
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script th:src="@{layer/layer.js}"></script>
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<script th:src="@{js/login.js}"></script>
 </body>
 </html>

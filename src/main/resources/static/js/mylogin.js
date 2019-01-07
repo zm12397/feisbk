@@ -29,7 +29,7 @@ $(document).ready(function(){
                     if(username == 'admin'){
                         window.location.href = "user-management";
                     }else{
-                        window.location.href = "my_homepage";
+                        window.location.href = "index";
                     }
                 }
                 else if(json.code==9999){
